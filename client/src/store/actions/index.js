@@ -161,7 +161,7 @@ export const ADD_STEP_FAILURE = "ADD_STEP_FAILURE";
 export const addStep = (step, id) => dispatch => {
   dispatch({ type: ADD_STEP_START });
   return axiosWithAuth()
-    .post(`/api/v1/step/${id}/lifehack`, step)
+    .post(`/api/guides/${id}/steps`, step)
     .then(res => {
       dispatch({ type: ADD_STEP_SUCCESS, payload: res.data.body });
     })
