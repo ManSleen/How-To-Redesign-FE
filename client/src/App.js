@@ -6,6 +6,7 @@ import HomeHeroImage from './components/HomeHeroImage.js';
 import HomeEmojiDivider from './components/HomeEmojiDivider';
 import HomepageDescription from './components/HomepageDescription';
 import ActionButton from './assets/buttons/ActionButton';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <HomeEmojiDivider />
       <HomepageDescription />
       <ActionButton text="Get Started" />
+      <Footer />
     </div>
   );
 }
