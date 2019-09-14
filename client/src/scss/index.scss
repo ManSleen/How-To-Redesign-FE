@@ -32,8 +32,6 @@ code {
   color: white;
   text-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
   border-bottom: 5px solid #bababa;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
-  z-index: 0;
 }
 
 .nav-bar-wrapper {
@@ -65,7 +63,7 @@ code {
 
 .sub-nav-bar-container {
   height: 46px;
-  padding: 0 20px;
+  padding: 0 25px;
   background: #e1e1e1;
   box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.1);
   color: #171717;
@@ -74,10 +72,10 @@ code {
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
-  z-index: 9999;
   .sub-nav-category {
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.03em;
+    font-size: 0.9rem;
   }
 }
 
@@ -95,7 +93,15 @@ code {
     letter-spacing: -0.02em;
     font-size: 4.1rem;
     text-align: left;
-    padding: 25px;
+    padding: 40px 25px;
     line-height: 100%;
   }
+}
+
+.home-emoji-divider {
+  margin: 40px 25px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
 }

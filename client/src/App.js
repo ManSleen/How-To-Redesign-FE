@@ -3,6 +3,7 @@ import './scss/index.scss';
 import NavBar from './components/NavBar.js';
 import SubNavBar from './components/SubNavBar.js';
 import HomeHeroImage from './components/HomeHeroImage.js';
+import HomeEmojiDivider from './components/HomeEmojiDivider';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <NavBar />
       <SubNavBar />
       <HomeHeroImage />
+      <HomeEmojiDivider />
     </div>
   );
 }
