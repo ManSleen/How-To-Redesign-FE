@@ -2,7 +2,7 @@ import React from 'react';
 import './scss/index.scss';
 import NavBar from './components/NavBar.js';
 import SubNavBar from './components/SubNavBar.js';
-import HomeHeroImage from './components/HomeHeroImage.js';
+import HomeHeroImage from './components/HomeHeroImage';
 import HomeEmojiDivider from './components/HomeEmojiDivider';
 import HomepageDescription from './components/HomepageDescription';
 import ActionButton from './assets/buttons/ActionButton';
