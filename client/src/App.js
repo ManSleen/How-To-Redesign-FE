@@ -1,14 +1,15 @@
-import React from "react";
-import "./css/index.css";
-import NavBar from './components/NavBar.js'
-import SubNavBar from './components/SubNavBar'
+import React from 'react';
+import './scss/index.scss';
+import NavBar from './components/NavBar.js';
+import SubNavBar from './components/SubNavBar.js';
+import HomeHeroImage from './components/HomeHeroImage.js';
 
 function App() {
   return (
     <div className="App">
       <NavBar />
       <SubNavBar />
-      <h1>Yo I'm App!</h1>
+      <HomeHeroImage />
     </div>
   );
 }

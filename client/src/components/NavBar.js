@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/index.css';
+import '../scss/index.scss';
 
 const NavBar = () => {
   return (
@@ -9,6 +9,7 @@ const NavBar = () => {
         <h2 className="nav-title">How-To</h2>
         <div className="nav-menu-button">Menu</div>
       </div>
+      <div className="nav-bar-divider"> </div>
     </div>
   );
 };
