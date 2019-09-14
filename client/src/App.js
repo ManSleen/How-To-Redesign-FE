@@ -1,14 +1,23 @@
-import React from "react";
-import "./App.css";
-import NavBar from './components/NavBar.js'
-import SubNavBar from './components/SubNavBar'
+import React from 'react';
+import './scss/index.scss';
+import NavBar from './components/NavBar.js';
+import SubNavBar from './components/SubNavBar.js';
+import HomeHeroImage from './components/HomeHeroImage.js';
+import HomeEmojiDivider from './components/HomeEmojiDivider';
+import HomepageDescription from './components/HomepageDescription';
+import ActionButton from './assets/buttons/ActionButton';
+import Footer from './components/Footer';
 
 function App() {
   return (
     <div className="App">
       <NavBar />
       <SubNavBar />
-      <h1>Yo I'm App!</h1>
+      <HomeHeroImage />
+      <HomeEmojiDivider />
+      <HomepageDescription />
+      <ActionButton text="Get Started" />
+      <Footer />
     </div>
   );
 }
