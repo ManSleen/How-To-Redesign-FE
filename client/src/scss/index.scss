@@ -5,10 +5,10 @@
 
 body {
   margin: 0;
-  font-family: 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
-    'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(180deg, #e5e5e5 46.22%, #e3e3e3 94.86%);
 }
 
 code {
@@ -104,4 +104,41 @@ code {
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
+}
+
+.homepage-description {
+  margin: 0 25px;
+  line-height: 240%;
+  letter-spacing: 0.2px;
+  font-size: 1.3rem;
+  text-align: left;
+  span {
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: -0.05em;
+    margin-right: 4px;
+  }
+}
+
+.action-button {
+  width: 276px;
+  height: 45px;
+  background: linear-gradient(162.72deg, #ff8832 29.48%, #e36f1b 67.19%);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.18);
+  border-radius: 22.5px;
+  border: none;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  margin: 35px auto;
+  p {
+    font-family: Roboto;
+    color: white;
+    font-weight: 700;
+    font-size: 1.3rem;
+    line-height: 45px;
+    margin-right: 8px;
+    letter-spacing: 0.5px;
+  }
 }
