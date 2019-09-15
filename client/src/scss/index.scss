@@ -180,3 +180,44 @@ code {
   border-radius: 50%;
   width: 84px;
 }
+
+.guide-section-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  margin: 15px 0 40px 0;
+  .guide-section-icon {
+    display: flex;
+    align-items: center;
+    color: white;
+    margin: 12px auto;
+    padding: 30px;
+    text-align: left;
+    width: 80%;
+    border-radius: 8px;
+    height: 100px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.18);
+    box-sizing: border-box;
+    h4 {
+      margin-left: 15px;
+      font-weight: 900;
+      font-size: 1.5rem;
+      text-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+.browse {
+  background: linear-gradient(168.85deg, #56d85c 7.54%, #35a93a 93.35%);
+}
+
+.my-guides {
+  background: linear-gradient(165.89deg, #3ab6ec 8.84%, #2d9bca 92.65%);
+}
+
+.add-guide {
+  background: linear-gradient(169.42deg, #f7c71f 7.28%, #dfb417 93.54%);
+}
+
+.logout {
+  background: linear-gradient(168.11deg, #ee4b4b 7.55%, #c03939 92.8%);
+}
