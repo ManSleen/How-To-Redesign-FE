@@ -1,6 +1,5 @@
 import React from 'react';
-import DividerSquiggle from '../assets/icons/DividerSquiggle.js';
-
+import DividerSquiggle from '../../assets/icons/DividerSquiggle.js';
 const HomeHeroImage = () => {
   return (
     <div className="home-hero-image">
