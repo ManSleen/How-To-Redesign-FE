@@ -1,22 +1,21 @@
 import React from 'react';
-import './scss/index.scss';
+import { Route } from 'react-router-dom';
+
 import NavBar from './components/NavBar.js';
 import SubNavBar from './components/SubNavBar.js';
-import HomeHeroImage from './components/HomeHeroImage';
-import HomeEmojiDivider from './components/HomeEmojiDivider';
-import HomepageDescription from './components/HomepageDescription';
-import ActionButton from './assets/buttons/ActionButton';
-import Footer from './components/Footer';
+import Footer from './components/Footer.js';
+import Home from './components/Home/Home.js';
+import UserProfile from './components/UserProfile/UserProfile.js';
+
+import './scss/index.scss';
 
 function App() {
   return (
     <div className="App">
       <NavBar />
       <SubNavBar />
-      <HomeHeroImage />
-      <HomeEmojiDivider />
-      <HomepageDescription />
-      <ActionButton text="Get Started" />
+      <Route exact path="/" component={Home} />
+      <Route exact path="/profile" component={UserProfile} />
       <Footer />
     </div>
   );
