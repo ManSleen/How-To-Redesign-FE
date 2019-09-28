@@ -1,11 +1,16 @@
 import React from 'react';
 
-const ActionButton = ({ history, routeTo, text }) => {
+const ActionButton = ({ history, routeTo, text, type }) => {
   return (
     <div className="action-button-container">
       <button
-        onClick={() => history.push(`${routeTo}`)}
+        onClick={() => {
+          if (history) {
+            history.push(`${routeTo}`);
+          }
+        }}
         className="action-button"
+        type={type ? type : 'button'}
       >
         <p>{text}</p>
         <svg
