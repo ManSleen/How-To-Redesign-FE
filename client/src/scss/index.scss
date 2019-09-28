@@ -42,6 +42,12 @@ code {
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
+  .nav-home-button a {
+    color: white;
+  }
+  .nav-menu-button a {
+    color: white;
+  }
 }
 
 .nav-title {
@@ -131,7 +137,7 @@ code {
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  margin: 40px auto 50px auto;
+  margin: 30px auto;
   p {
     font-family: Roboto;
     color: white;
@@ -234,12 +240,21 @@ code {
   background: linear-gradient(168.11deg, #ee4b4b 7.55%, #c03939 92.8%);
 }
 
-.sign-up-form-container {
+.sign-up-form-container,
+.login-form-container {
   margin: 30px 25px;
   text-align: left;
   h3 {
     font-weight: 900;
     font-size: 1.8rem;
     letter-spacing: -0.02em;
+    margin-bottom: 10px;
+  }
+  .sign-up-form-login {
+    text-align: center;
+    span {
+      color: #0db1f6;
+      font-weight: 900;
+    }
   }
 }
