@@ -5,13 +5,13 @@ import HomeEmojiDivider from './HomeEmojiDivider.js';
 import HomepageDescription from './HomepageDescription.js';
 import ActionButton from '../../assets/buttons/ActionButton.js';
 
-const Home = () => {
+const Home = ({ history }) => {
   return (
     <div>
       <HomeHeroImage />
       <HomeEmojiDivider />
       <HomepageDescription />
-      <ActionButton text="Get Started" />
+      <ActionButton history={history} routeTo="/sign-up" text="Get Started" />
     </div>
   );
 };

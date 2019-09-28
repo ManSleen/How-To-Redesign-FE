@@ -1,10 +1,13 @@
 import React from 'react';
 
-const ActionButton = props => {
+const ActionButton = ({ history, routeTo, text }) => {
   return (
     <div className="action-button-container">
-      <button className="action-button">
-        <p>{props.text}</p>
+      <button
+        onClick={() => history.push(`${routeTo}`)}
+        className="action-button"
+      >
+        <p>{text}</p>
         <svg
           width="17"
           height="12"
