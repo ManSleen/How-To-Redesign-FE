@@ -8,6 +8,7 @@ import Home from './components/Home/Home.js';
 import UserProfile from './components/UserProfile/UserProfile.js';
 import SignUp from './components/SignUp/SignUp.js';
 import Login from './components/Login/Login.js';
+import AddGuide from './components/GuideForm/AddGuide.js';
 
 import './scss/index.scss';
 
@@ -20,6 +21,7 @@ function App() {
       <Route exact path="/profile" component={UserProfile} />
       <Route exact path="/sign-up" component={SignUp} />
       <Route exact path="/login" component={Login} />
+      <Route exact path="/create-guide" component={AddGuide} />
       <Footer />
     </div>
   );
