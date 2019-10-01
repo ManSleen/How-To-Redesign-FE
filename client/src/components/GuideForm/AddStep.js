@@ -97,8 +97,10 @@ const AddStep = ({ history }) => {
             <p>Choose Images to Upload</p>
           </div>
         </div>
-
-        <ActionButton type="submit" text="Next" />
+        <button type="button" className="add-another-step">
+          Add Another Step
+        </button>
+        <ActionButton type="submit" text="Create Guide" />
       </form>
     </div>
   );
