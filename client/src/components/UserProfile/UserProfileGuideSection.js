@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   faEye,
@@ -20,10 +21,14 @@ const UserProfileGuideSection = () => {
         <FontAwesomeIcon size="2x" icon={faUserCircle} />
         <h4>My Guides</h4>
       </div>
-      <div className="guide-section-icon add-guide">
-        <FontAwesomeIcon size="2x" icon={faPlus} />
-        <h4>Add A Guide</h4>
-      </div>
+
+      <Link className="add-guide link" to="/create-guide">
+        <div>
+          <FontAwesomeIcon size="2x" icon={faPlus} />
+          <h4>Add A Guide</h4>
+        </div>
+      </Link>
+
       <div className="guide-section-icon logout">
         <FontAwesomeIcon size="2x" icon={faSignOutAlt} />
         <h4>Log Out</h4>

@@ -9,6 +9,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: linear-gradient(180deg, #e5e5e5 46.22%, #e3e3e3 94.86%);
+  a {
+    cursor: pointer;
+  }
 }
 
 code {
@@ -204,6 +207,31 @@ code {
   flex-flow: row wrap;
   justify-content: flex-start;
   margin: 15px 0 40px 0;
+  .link {
+    display: flex;
+    align-items: center;
+    color: white;
+    margin: 12px auto;
+    padding: 30px;
+    text-align: left;
+    width: 80%;
+    border-radius: 8px;
+    height: 100px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.18);
+    box-sizing: border-box;
+    cursor: pointer;
+    h4 {
+      margin-left: 15px;
+      font-weight: 900;
+      font-size: 1.5rem;
+      text-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+      display: inline;
+    }
+  }
+  a {
+    color: white;
+    text-decoration: none;
+  }
   .guide-section-icon {
     display: flex;
     align-items: center;
@@ -216,28 +244,36 @@ code {
     height: 100px;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.18);
     box-sizing: border-box;
+    cursor: pointer;
+
     h4 {
       margin-left: 15px;
       font-weight: 900;
       font-size: 1.5rem;
       text-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+      display: inline;
     }
   }
-}
-.browse {
-  background: linear-gradient(168.85deg, #56d85c 7.54%, #35a93a 93.35%);
-}
+  .browse {
+    background: linear-gradient(168.85deg, #56d85c 7.54%, #35a93a 93.35%);
+  }
 
-.my-guides {
-  background: linear-gradient(165.89deg, #3ab6ec 8.84%, #2d9bca 92.65%);
-}
+  .my-guides {
+    background: linear-gradient(165.89deg, #3ab6ec 8.84%, #2d9bca 92.65%);
+  }
 
-.add-guide {
-  background: linear-gradient(169.42deg, #f7c71f 7.28%, #dfb417 93.54%);
-}
+  .add-guide {
+    background: linear-gradient(169.42deg, #f7c71f 7.28%, #dfb417 93.54%);
+  }
 
-.logout {
-  background: linear-gradient(168.11deg, #ee4b4b 7.55%, #c03939 92.8%);
+  .logout {
+    background: linear-gradient(168.11deg, #ee4b4b 7.55%, #c03939 92.8%);
+  }
+}
+.guide-section-icon.add-guide {
+  a:hover {
+    cursor: pointer;
+  }
 }
 
 .sign-up-form-container,
