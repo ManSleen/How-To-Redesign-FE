@@ -9,6 +9,7 @@ import UserProfile from './components/UserProfile/UserProfile.js';
 import SignUp from './components/SignUp/SignUp.js';
 import Login from './components/Login/Login.js';
 import AddGuide from './components/GuideForm/AddGuide.js';
+import AddStep from './components/GuideForm/AddStep.js';
 
 import './scss/index.scss';
 
@@ -22,6 +23,7 @@ function App() {
       <Route exact path="/sign-up" component={SignUp} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/create-guide" component={AddGuide} />
+      <Route exact path="/add-step" component={AddStep} />
       <Footer />
     </div>
   );

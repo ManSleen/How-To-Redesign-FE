@@ -34,13 +34,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const GuideForm = ({ history }) => {
+const AddStep = ({ history }) => {
   const classes = useStyles();
   const inputLabel = React.useRef(null);
   const [labelWidth, setLabelWidth] = React.useState(0);
-  React.useEffect(() => {
-    setLabelWidth(inputLabel.current.offsetWidth);
-  }, []);
 
   const [guide, setGuide] = useState({
     guide_name: '',
@@ -63,7 +60,10 @@ const GuideForm = ({ history }) => {
   };
   return (
     <div className="guide-form-container">
-      <h3>Create a Guide</h3>
+      <div className="guide-photo-upload-input">
+        <h3>Add Instructions</h3>
+      </div>
+      <h4>Step 1</h4>
       <form onSubmit={handleSubmit}>
         <TextField
           fullWidth
@@ -97,70 +97,11 @@ const GuideForm = ({ history }) => {
             <p>Choose Images to Upload</p>
           </div>
         </div>
-        <FormControl
-          fullWidth
-          variant="outlined"
-          margin="normal"
-          className={classes.formControl}
-        >
-          <InputLabel ref={inputLabel} htmlFor="outlined-age-simple">
-            Category
-          </InputLabel>
-          <Select
-            value={guide.guide_category}
-            onChange={handleChange}
-            labelWidth={labelWidth}
-            inputProps={{
-              name: 'guide_category',
-              id: 'outlined-age-simple'
-            }}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={'tech'}>Tech</MenuItem>
-            <MenuItem value={'craft'}>Craft</MenuItem>
-            <MenuItem value={'outdoors'}>Outdoors</MenuItem>
-            <MenuItem value={'food'}>Food</MenuItem>
-          </Select>
-        </FormControl>
-        <TextField
-          fullWidth
-          id="outlined-name"
-          label="Keywords"
-          name="guide_keywords"
-          className={classes.textField}
-          value={guide.guide_keywords}
-          onChange={handleChange}
-          margin="normal"
-          variant="outlined"
-        />
-        <TextField
-          fullWidth
-          id="outlined-name"
-          label="Materials"
-          name="guide_materials"
-          className={classes.textField}
-          value={guide.guide_materials}
-          onChange={handleChange}
-          margin="normal"
-          variant="outlined"
-        />
-        <TextField
-          fullWidth
-          id="outlined-name"
-          label="Tools"
-          name="guide_tools"
-          className={classes.textField}
-          value={guide.guide_tools}
-          onChange={handleChange}
-          margin="normal"
-          variant="outlined"
-        />
+
         <ActionButton type="submit" text="Next" />
       </form>
     </div>
   );
 };
 
-export default GuideForm;
+export default AddStep;

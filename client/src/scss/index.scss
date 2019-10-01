@@ -117,10 +117,13 @@ code {
 
 .homepage-description {
   margin: 0 25px;
-  line-height: 240%;
-  letter-spacing: 0.2px;
-  font-size: 1.3rem;
-  text-align: left;
+  p {
+    line-height: 200%;
+    letter-spacing: 0.2px;
+    font-size: 1.3rem;
+    text-align: left;
+    margin-bottom: 50px;
+  }
   span {
     font-weight: 900;
     font-size: 1.5rem;
@@ -155,7 +158,6 @@ code {
 .footer-container {
   background: linear-gradient(180deg, #0db1f7 0%, #059bdb 100%);
   height: 72px;
-
   padding: 0 25px;
   display: flex;
   flex-flow: row nowrap;
@@ -254,7 +256,7 @@ code {
       display: inline;
     }
   }
-  .browse {
+  .add-guide {
     background: linear-gradient(168.85deg, #56d85c 7.54%, #35a93a 93.35%);
   }
 
@@ -262,7 +264,7 @@ code {
     background: linear-gradient(165.89deg, #3ab6ec 8.84%, #2d9bca 92.65%);
   }
 
-  .add-guide {
+  .browse {
     background: linear-gradient(169.42deg, #f7c71f 7.28%, #dfb417 93.54%);
   }
 
@@ -293,5 +295,31 @@ code {
       color: #0db1f6;
       font-weight: 900;
     }
+  }
+}
+
+.guide-photo-upload-input {
+  margin: 20px 0;
+  .drop-zone-image-upload {
+    background: #c4c4c4;
+    box-shadow: inset 0px 0px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+    height: 187px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    p {
+      letter-spacing: 0.03em;
+      color: #858585;
+    }
+  }
+  h4 {
+    line-height: 23px;
+    letter-spacing: 0.03em;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
   }
 }
