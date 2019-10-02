@@ -94,7 +94,7 @@ const GuideForm = ({ history }) => {
           <h4>Upload Project Images</h4>
           <div className="drop-zone-image-upload">
             <CameraIcon />
-            <p>Choose Images to Upload</p>
+            <p>Choose Images to upload</p>
           </div>
         </div>
         <FormControl
