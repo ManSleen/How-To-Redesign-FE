@@ -323,3 +323,27 @@ code {
     margin-bottom: 20px;
   }
 }
+
+.add-another-step {
+  height: 45px;
+  background: none;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.18);
+  border-radius: 22.5px;
+  border: 2px solid #e97520;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto;
+  padding: 0 25px;
+  p {
+    font-family: Roboto;
+    color: #e97520;
+    font-weight: 900;
+    font-size: 1.1rem;
+    line-height: 45px;
+    margin-right: 2px;
+    letter-spacing: 0.5px;
+  }
+}

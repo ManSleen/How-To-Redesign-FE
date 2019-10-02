@@ -91,14 +91,30 @@ const AddStep = ({ history }) => {
           variant="outlined"
         />
         <div className="guide-photo-upload-input">
-          <h4>Upload Project Images</h4>
+          <h4>Upload Instruction Images</h4>
           <div className="drop-zone-image-upload">
             <CameraIcon />
-            <p>Choose Images to Upload</p>
+            <p>Choose Images to upload</p>
           </div>
         </div>
-        <button type="button" className="add-another-step">
-          Add Another Step
+        <button
+          onClick={() => history.push('/add-step')}
+          type="button"
+          className="add-another-step"
+        >
+          <p>Add Step</p>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+              fill="#E97520"
+            />
+          </svg>
         </button>
         <ActionButton type="submit" text="Create Guide" />
       </form>
