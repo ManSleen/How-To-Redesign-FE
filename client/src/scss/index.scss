@@ -289,6 +289,11 @@ code {
     letter-spacing: -0.02em;
     margin-bottom: 10px;
   }
+  h4 {
+    display: inline;
+    margin: 60px 10px 0 0;
+    font-size: 1.3rem;
+  }
   .sign-up-form-login {
     text-align: center;
     span {
@@ -346,4 +351,8 @@ code {
     margin-right: 2px;
     letter-spacing: 0.5px;
   }
+}
+
+.guide-category-section {
+  margin: 40px 0;
 }
