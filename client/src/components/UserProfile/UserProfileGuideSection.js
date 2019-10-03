@@ -18,11 +18,13 @@ const UserProfileGuideSection = () => {
           <h4>Create a Guide</h4>
         </div>
       </Link>
-      <div className="guide-section-icon browse">
-        <FontAwesomeIcon size="2x" icon={faEye} />
+      <Link className="browse link" to="/browse">
+        <div>
+          <FontAwesomeIcon size="2x" icon={faEye} />
 
-        <h4>Browse Guides</h4>
-      </div>
+          <h4>Browse Guides</h4>
+        </div>
+      </Link>
       <div className="guide-section-icon my-guides">
         <FontAwesomeIcon size="2x" icon={faUserCircle} />
         <h4>My Guides</h4>

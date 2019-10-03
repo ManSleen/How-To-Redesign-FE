@@ -15,21 +15,46 @@ const BrowseGuides = () => {
         <FloppyEmoji />
         <div className="guides-scroll-container">
           <GuideCard />
+          <GuideCard />
+          <GuideCard />
+          <GuideCard />
+          <GuideCard />
         </div>
       </div>
       <div className="guide-category-section craft">
         <h4>Craft</h4>
         <Palette />
+        <div className="guides-scroll-container">
+          <GuideCard />
+          <GuideCard />
+          <GuideCard />
+          <GuideCard />
+          <GuideCard />
+        </div>
         <div className="guides-scroll-container"></div>
       </div>
       <div className="guide-category-section outdoors">
         <h4>Outdoors</h4>
         <Tent />
+        <div className="guides-scroll-container">
+          <GuideCard />
+          <GuideCard />
+          <GuideCard />
+          <GuideCard />
+          <GuideCard />
+        </div>
         <div className="guides-scroll-container"></div>
       </div>
       <div className="guide-category-section food">
         <h4>Food</h4>
         <PizzaEmoji />
+        <div className="guides-scroll-container">
+          <GuideCard />
+          <GuideCard />
+          <GuideCard />
+          <GuideCard />
+          <GuideCard />
+        </div>
         <div className="guides-scroll-container"></div>
       </div>
     </div>
