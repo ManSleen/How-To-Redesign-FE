@@ -25,10 +25,12 @@ const UserProfileGuideSection = () => {
           <h4>Browse Guides</h4>
         </div>
       </Link>
-      <div className="guide-section-icon my-guides">
-        <FontAwesomeIcon size="2x" icon={faUserCircle} />
-        <h4>My Guides</h4>
-      </div>
+      <Link className="my-guides link" to="/my-guides">
+        <div>
+          <FontAwesomeIcon size="2x" icon={faUserCircle} />
+          <h4>My Guides</h4>
+        </div>
+      </Link>
 
       <div className="guide-section-icon logout">
         <FontAwesomeIcon size="2x" icon={faSignOutAlt} />
