@@ -3,6 +3,16 @@
   padding: 0;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  color: #171717;
+}
+
 body {
   margin: 0;
   font-family: Roboto, sans-serif;
@@ -56,6 +66,7 @@ code {
 .nav-title {
   letter-spacing: -0.04em;
   font-size: 2rem;
+  color: white;
 }
 
 .sub-nav-bar-container {
@@ -171,6 +182,7 @@ code {
   .footer-logo {
     letter-spacing: -0.04em;
     font-size: 1.5rem;
+    color: white;
   }
   .footer-github-logo {
     width: 20%;
@@ -209,6 +221,7 @@ code {
   flex-flow: row wrap;
   justify-content: flex-start;
   margin: 15px 0 40px 0;
+
   .link {
     display: flex;
     align-items: center;
@@ -228,6 +241,7 @@ code {
       font-size: 1.5rem;
       text-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
       display: inline;
+      color: white;
     }
   }
   a {
@@ -254,6 +268,7 @@ code {
       font-size: 1.5rem;
       text-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
       display: inline;
+      color: white;
     }
   }
   .add-guide {
@@ -406,5 +421,52 @@ code {
     width: 100%;
     border-radius: 8px 8px 0 0;
     height: 240px;
+  }
+}
+
+.my-guides-container {
+  margin-bottom: 90px;
+  .my-guide-card-container {
+    width: 100%;
+    height: 132px;
+    background: white;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.1);
+    margin: 15px 0;
+    .my-guide-card-thumbnail {
+      align-self: stretch;
+      img {
+        width: 100px;
+        height: 100%;
+        object-fit: cover;
+        box-sizing: border-box;
+      }
+    }
+    .my-guide-card-description {
+      text-align: left;
+      margin-left: 35px;
+    }
+    .my-guide-card-edit {
+      margin: 0 25px;
+    }
+  }
+  h2 {
+    font-weight: 900;
+    font-size: 1.8rem;
+    letter-spacing: -0.02em;
+    margin: 30px 0 42px 25px;
+    text-align: left;
+  }
+  h3 {
+    color: rgba(0, 0, 0, 0.87);
+  }
+  h4 {
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: 0.25px;
+    color: rgba(0, 0, 0, 0.6);
   }
 }
