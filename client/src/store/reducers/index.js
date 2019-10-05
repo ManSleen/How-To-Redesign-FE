@@ -29,19 +29,23 @@ import {
   ADD_STEP_FAILURE,
   GET_SINGLE_USER_START,
   GET_SINGLE_USER_SUCCESS,
-  GET_SINGLE_USER_FAILURE
-} from "../actions";
+  GET_SINGLE_USER_FAILURE,
+  GET_GUIDES_BY_USER_START,
+  GET_GUIDES_BY_USER_SUCCESS,
+  GET_GUIDES_BY_USER_FAILURE
+} from '../actions';
 
 const initialState = {
   user: null,
-  currentUser: null,
+  currentUser: JSON.parse(localStorage.getItem('user')) || null,
+  currentUsersGuides: [],
   users: null,
   guide: null,
   guides: [],
   guideById: null,
-  error: "",
+  error: '',
   isLoading: false,
-  isLoggedIn: localStorage.getItem("token"),
+  isLoggedIn: localStorage.getItem('token') ? true : false,
   fetchingData: false
 };
 
@@ -50,41 +54,40 @@ export const reducer = (state = initialState, action) => {
     case LOGIN_START:
       return {
         ...state,
-        error: "",
+        error: '',
         isLoading: true,
         fetchingData: false
       };
     case LOGIN_SUCCESS:
       return {
         ...state,
-        guides: [],
         currentUser: action.payload,
-        error: "",
+        error: '',
         isLoading: false,
         fetchingData: false
       };
     case LOGIN_FAILURE:
       return {
         ...state,
-        error: "Login failed, please try again",
+        error: 'Login failed, please try again',
         isLoading: false,
         fetchingData: false
       };
     case LOGOUT:
       return {
         ...state,
-        guides: [],
+        guides: null,
         user: null,
         currentUser: null,
-        error: "",
+        error: '',
         isLoading: false,
         fetchingData: false
       };
     case GET_GUIDES_START:
       return {
         ...state,
-        guides: [],
-        error: "",
+        guides: null,
+        error: '',
         isLoading: true,
         fetchingData: true
       };
@@ -92,7 +95,7 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         guides: action.payload,
-        error: "",
+        error: '',
         isLoading: false,
         fetchingData: false
       };
@@ -109,7 +112,7 @@ export const reducer = (state = initialState, action) => {
         user: null,
         users: null,
         guides: [],
-        error: "",
+        error: '',
         isLoading: true,
         fetchingData: false
       };
@@ -117,15 +120,14 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         currentUser: action.payload,
-        guides: [],
-        error: "",
+        error: '',
         isLoading: false,
         fetchingData: false
       };
     case SIGN_UP_FAILURE:
       return {
         ...state,
-        error: "Error signing up",
+        error: action.payload.response.data.message,
         isLoading: false,
         fetchingData: false
       };
@@ -133,7 +135,7 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         users: null,
-        error: "",
+        error: '',
         isLoading: true,
         fetchingData: true
       };
@@ -141,21 +143,21 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         users: action.payload,
-        error: "",
+        error: '',
         isLoading: false,
         fetchingData: false
       };
     case GET_USERS_FAILURE:
       return {
         ...state,
-        error: "Error getting all users",
+        error: 'Error getting all users',
         isLoading: false,
         fetchingData: false
       };
     case GET_GUIDE_BY_ID_START:
       return {
         ...state,
-        error: "",
+        error: '',
         isLoading: false,
         fetchingData: false
       };
@@ -163,27 +165,27 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         guideById: action.payload,
-        error: "",
+        error: '',
         isLoading: false,
         fetchingData: false
       };
     case GET_GUIDE_BY_ID_FAILURE:
       return {
         ...state,
-        error: "Error fetching item by ID",
+        error: 'Error fetching item by ID',
         isLoading: false,
         fetchingData: false
       };
     case DELETE_GUIDE_START:
       return {
         ...state,
-        error: "",
+        error: '',
         isLoading: true
       };
     case DELETE_GUIDE_SUCCESS:
       return {
         ...state,
-        error: "",
+        error: '',
         isLoading: false
       };
     case DELETE_GUIDE_FAILURE:
@@ -195,57 +197,57 @@ export const reducer = (state = initialState, action) => {
     case ADD_GUIDE_START:
       return {
         ...state,
-        error: "",
+        error: '',
         isLoading: true
       };
     case ADD_GUIDE_SUCCESS:
       return {
         ...state,
         guides: [...state.guides, action.payload],
-        error: "",
+        error: '',
         isLoading: false
       };
     case ADD_GUIDE_FAILURE:
       return {
         ...state,
-        error: "Error adding guide",
+        error: 'Error adding guide',
         isLoading: false
       };
     case UPDATE_GUIDE_START:
       return {
         ...state,
-        error: "",
+        error: '',
         isLoading: true
       };
     case UPDATE_GUIDE_SUCCESS:
       return {
         ...state,
         guides: [...state.guides],
-        error: "",
+        error: '',
         isLoading: false
       };
     case UPDATE_GUIDE_FAILURE:
       return {
         ...state,
-        error: "Error updating guide",
+        error: 'Error updating guide',
         isLoading: false
       };
     case ADD_STEP_START:
       return {
         ...state,
-        error: "",
+        error: '',
         isLoading: true
       };
     case ADD_STEP_SUCCESS:
       return {
         ...state,
-        error: "",
+        error: '',
         isLoading: false
       };
     case ADD_STEP_FAILURE:
       return {
         ...state,
-        error: "Error adding a step",
+        error: 'Error adding a step',
         isLoading: false
       };
 
@@ -253,7 +255,7 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         user: null,
-        error: "",
+        error: '',
         isLoading: true,
         fetchingData: true
       };
@@ -261,16 +263,38 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload[0],
-        error: "",
+        error: '',
         isLoading: false,
         fetchingData: false
       };
     case GET_SINGLE_USER_FAILURE:
       return {
         ...state,
-        error: "Error getting single user",
+        error: 'Error getting single user',
         isLoading: false,
         fetchingData: false
+      };
+    case GET_GUIDES_BY_USER_START:
+      return {
+        ...state,
+        error: '',
+        isLoading: true,
+        fetchingData: true,
+        currentUsersGuides: []
+      };
+    case GET_GUIDES_BY_USER_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        fetchingData: false,
+        currentUsersGuides: action.payload
+      };
+    case GET_GUIDES_BY_USER_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        fetchingData: false,
+        error: 'Error getting guides by user'
       };
     default:
       return state;

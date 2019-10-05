@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import {
   faEye,
@@ -9,7 +10,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const UserProfileGuideSection = () => {
+import { logout } from '../../store/actions';
+
+const UserProfileGuideSection = ({ logout }) => {
   return (
     <div className="guide-section-container">
       <Link className="add-guide link" to="/create-guide">
@@ -32,7 +35,7 @@ const UserProfileGuideSection = () => {
         </div>
       </Link>
 
-      <div className="guide-section-icon logout">
+      <div onClick={logout} className="guide-section-icon logout">
         <FontAwesomeIcon size="2x" icon={faSignOutAlt} />
         <h4>Log Out</h4>
       </div>
@@ -40,4 +43,7 @@ const UserProfileGuideSection = () => {
   );
 };
 
-export default UserProfileGuideSection;
+export default connect(
+  null,
+  { logout }
+)(UserProfileGuideSection);

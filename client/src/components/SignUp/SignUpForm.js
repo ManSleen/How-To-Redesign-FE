@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import ActionButton from '../../assets/buttons/ActionButton';
+
+import { signUp } from '../../store/actions';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -19,11 +22,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SignUpForm = ({ history }) => {
+const SignUpForm = ({ history, signUp, error }) => {
   const classes = useStyles();
 
   const [user, setUser] = useState({
     name: '',
+    about_me: '',
     email: '',
     username: '',
     password: ''
@@ -38,12 +42,16 @@ const SignUpForm = ({ history }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    history.push('/profile');
+    signUp(user).then(res => {
+      if (res) {
+        history.push('/profile');
+      }
+    });
   };
-
   return (
     <div className="sign-up-form-container">
       <h3>Sign Up</h3>
+      {error && <p className="form-error">{error}</p>}
       <form onSubmit={handleSubmit}>
         <TextField
           fullWidth
@@ -58,20 +66,33 @@ const SignUpForm = ({ history }) => {
           autoComplete="name"
         />
         <TextField
+          id="outlined-multiline-static"
+          label="About Me"
+          name="about_me"
+          multiline
           fullWidth
-          id="outlined-name"
+          rows="4"
+          onChange={handleChange}
+          className={classes.textField}
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          fullWidth
+          id="outlined-email"
           label="Email"
           name="email"
           className={classes.textField}
           value={user.email}
           onChange={handleChange}
           margin="normal"
+          type="email"
           variant="outlined"
           autoComplete="email"
         />
         <TextField
           fullWidth
-          id="outlined-name"
+          id="outlined-username"
           label="Username"
           name="username"
           className={classes.textField}
@@ -83,7 +104,7 @@ const SignUpForm = ({ history }) => {
         />
         <TextField
           fullWidth
-          id="outlined-name"
+          id="outlined-password"
           label="Password"
           name="password"
           type="password"
@@ -108,4 +129,13 @@ const SignUpForm = ({ history }) => {
   );
 };
 
-export default SignUpForm;
+const mapStateToProps = state => {
+  return {
+    error: state.error
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { signUp }
+)(SignUpForm);

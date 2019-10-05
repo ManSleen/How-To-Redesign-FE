@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import ActionButton from '../../assets/buttons/ActionButton';
+
+import { login } from '../../store/actions';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -18,12 +21,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Login = ({ history }) => {
+const Login = ({ history, login }) => {
   const classes = useStyles();
 
   const [user, setUser] = useState({
-    name: '',
-    email: '',
     username: '',
     password: ''
   });
@@ -37,7 +38,12 @@ const Login = ({ history }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    history.push('/profile');
+    console.log('user from login handlesubmit', user);
+    login(user).then(res => {
+      if (res) {
+        history.push('/profile');
+      }
+    });
   };
 
   return (
@@ -76,4 +82,7 @@ const Login = ({ history }) => {
   );
 };
 
-export default Login;
+export default connect(
+  null,
+  { login }
+)(Login);

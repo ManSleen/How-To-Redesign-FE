@@ -200,13 +200,16 @@ code {
     text-align: left;
     letter-spacing: -0.02em;
     margin-left: -20px;
+    justify-self: flex-start;
+    width: 165px;
     h3 {
       font-weight: 900;
-      font-size: 1.8rem;
+      font-size: 1.5rem;
     }
     h4 {
       font-weight: normal;
       font-size: 0.9rem;
+      margin-bottom: 5px;
     }
   }
 }
@@ -298,6 +301,9 @@ code {
 .guide-form-container {
   margin: 30px 25px;
   text-align: left;
+  .form-error {
+    color: red;
+  }
   h3 {
     font-weight: 900;
     font-size: 1.8rem;
