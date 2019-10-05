@@ -298,6 +298,9 @@ code {
 .guide-form-container {
   margin: 30px 25px;
   text-align: left;
+  .form-error {
+    color: red;
+  }
   h3 {
     font-weight: 900;
     font-size: 1.8rem;

@@ -16,7 +16,10 @@ export const signUp = credentials => dispatch => {
     })
     .catch(err => {
       console.log(err);
-      dispatch({ type: SIGN_UP_FAILURE });
+      dispatch({
+        type: SIGN_UP_FAILURE,
+        payload: err || 'Something went wrong'
+      });
     });
 };
 

@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SignUpForm = ({ history, signUp }) => {
+const SignUpForm = ({ history, signUp, error }) => {
   const classes = useStyles();
 
   const [user, setUser] = useState({
@@ -42,13 +42,17 @@ const SignUpForm = ({ history, signUp }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    signUp(user);
-    history.push('/profile');
+    signUp(user).then(res => {
+      if (res) {
+        history.push('/profile');
+      }
+    });
   };
-
+  console.log(error);
   return (
     <div className="sign-up-form-container">
       <h3>Sign Up</h3>
+      {error && <p className="form-error">{error}</p>}
       <form onSubmit={handleSubmit}>
         <TextField
           fullWidth
@@ -83,6 +87,7 @@ const SignUpForm = ({ history, signUp }) => {
           value={user.email}
           onChange={handleChange}
           margin="normal"
+          type="email"
           variant="outlined"
           autoComplete="email"
         />
@@ -125,7 +130,13 @@ const SignUpForm = ({ history, signUp }) => {
   );
 };
 
+const mapStateToProps = state => {
+  return {
+    error: state.error
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   { signUp }
 )(SignUpForm);

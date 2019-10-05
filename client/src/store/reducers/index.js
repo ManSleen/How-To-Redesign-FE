@@ -123,7 +123,7 @@ export const reducer = (state = initialState, action) => {
     case SIGN_UP_FAILURE:
       return {
         ...state,
-        error: 'Error signing up',
+        error: action.payload.response.data.message,
         isLoading: false,
         fetchingData: false
       };
