@@ -11,7 +11,8 @@ export const signUp = credentials => dispatch => {
     .then(res => {
       console.log(res);
       localStorage.setItem('token', res.data.token);
-      dispatch({ type: SIGN_UP_SUCCESS, payload: res.data.body });
+      localStorage.setItem('user', res.data.saved);
+      dispatch({ type: SIGN_UP_SUCCESS, payload: res.data.saved });
       return true;
     })
     .catch(err => {
@@ -34,6 +35,7 @@ export const login = credentials => dispatch => {
     .then(res => {
       console.log('login res', res);
       localStorage.setItem('token', res.data.token);
+      localStorage.setItem('user', JSON.stringify(res.data.user));
       dispatch({ type: LOGIN_SUCCESS, payload: res.data.user });
       return true;
     })
@@ -48,6 +50,7 @@ export const LOGOUT = 'LOGOUT';
 export const logout = () => dispatch => {
   dispatch({ type: LOGOUT });
   localStorage.removeItem('token');
+  localStorage.removeItem('user');
 };
 
 export const GET_GUIDES_START = 'GET_GUIDES_START';

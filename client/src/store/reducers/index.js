@@ -34,7 +34,7 @@ import {
 
 const initialState = {
   user: null,
-  currentUser: null,
+  currentUser: JSON.parse(localStorage.getItem('user')) || null,
   users: null,
   guide: null,
   guides: null,

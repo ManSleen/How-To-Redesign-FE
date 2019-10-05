@@ -48,7 +48,6 @@ const SignUpForm = ({ history, signUp, error }) => {
       }
     });
   };
-  console.log(error);
   return (
     <div className="sign-up-form-container">
       <h3>Sign Up</h3>
