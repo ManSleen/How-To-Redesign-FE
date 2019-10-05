@@ -37,7 +37,7 @@ const initialState = {
   currentUser: JSON.parse(localStorage.getItem('user')) || null,
   users: null,
   guide: null,
-  guides: null,
+  guides: [],
   guideById: null,
   error: '',
   isLoading: false,
@@ -107,7 +107,7 @@ export const reducer = (state = initialState, action) => {
         ...state,
         user: null,
         users: null,
-        guides: null,
+        guides: [],
         error: '',
         isLoading: true,
         fetchingData: false

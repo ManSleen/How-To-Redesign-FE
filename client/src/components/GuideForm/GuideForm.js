@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import moment from 'moment';
 
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -8,6 +10,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import { makeStyles } from '@material-ui/core/styles';
 import CameraIcon from '../../assets/icons/CameraIcon';
 import ActionButton from '../../assets/buttons/ActionButton';
+
+import { addGuide } from '../../store/actions';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -34,7 +38,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const GuideForm = ({ history }) => {
+const GuideForm = ({ history, addGuide, user }) => {
   const classes = useStyles();
   const inputLabel = React.useRef(null);
   const [labelWidth, setLabelWidth] = React.useState(0);
@@ -43,11 +47,14 @@ const GuideForm = ({ history }) => {
   }, []);
 
   const [guide, setGuide] = useState({
+    guide_creator: user.id,
     guide_name: '',
     guide_description: '',
     guide_category: '',
     guide_keywords: '',
-    guide_materials: ''
+    guide_materials: '',
+    guide_tools: '',
+    date_created: moment().format('YYYY-MM-DD')
   });
 
   const handleChange = e => {
@@ -59,7 +66,12 @@ const GuideForm = ({ history }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    history.push('/add-step');
+    console.log(guide);
+    addGuide(guide).then(res => {
+      if (res) {
+        history.push('/add-step');
+      }
+    });
   };
   return (
     <div className="guide-form-container">
@@ -89,6 +101,7 @@ const GuideForm = ({ history }) => {
           className={classes.textField}
           margin="normal"
           variant="outlined"
+          value={guide.guide_description}
         />
         <div className="guide-photo-upload-input">
           <h4>Upload Project Images</h4>
@@ -163,4 +176,13 @@ const GuideForm = ({ history }) => {
   );
 };
 
-export default GuideForm;
+const mapStateToProps = state => {
+  return {
+    user: state.currentUser
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { addGuide }
+)(GuideForm);

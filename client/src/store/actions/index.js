@@ -11,7 +11,7 @@ export const signUp = credentials => dispatch => {
     .then(res => {
       console.log(res);
       localStorage.setItem('token', res.data.token);
-      localStorage.setItem('user', res.data.saved);
+      localStorage.setItem('user', JSON.stringify(res.data.saved));
       dispatch({ type: SIGN_UP_SUCCESS, payload: res.data.saved });
       return true;
     })
