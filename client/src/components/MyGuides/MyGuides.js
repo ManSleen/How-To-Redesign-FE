@@ -1,16 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+
 import MyGuideCard from './MyGuideCard';
 
-const MyGuides = () => {
+import { getGuidesByUserId } from '../../store/actions';
+
+const MyGuides = ({ getGuidesByUserId, user, guides }) => {
+  useEffect(() => {
+    getGuidesByUserId(user.id);
+  }, []);
   return (
     <div className="my-guides-container">
       <h2>My Guides</h2>
-      <MyGuideCard />
-      <MyGuideCard />
-      <MyGuideCard />
-      <MyGuideCard />
+      {guides.map(guide => {
+        return <MyGuideCard guide={guide} />;
+      })}
     </div>
   );
 };
 
-export default MyGuides;
+const mapStateToProps = state => {
+  return {
+    user: state.currentUser,
+    guides: state.currentUsersGuides
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { getGuidesByUserId }
+)(MyGuides);

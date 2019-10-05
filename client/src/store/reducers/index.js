@@ -29,12 +29,16 @@ import {
   ADD_STEP_FAILURE,
   GET_SINGLE_USER_START,
   GET_SINGLE_USER_SUCCESS,
-  GET_SINGLE_USER_FAILURE
+  GET_SINGLE_USER_FAILURE,
+  GET_GUIDES_BY_USER_START,
+  GET_GUIDES_BY_USER_SUCCESS,
+  GET_GUIDES_BY_USER_FAILURE
 } from '../actions';
 
 const initialState = {
   user: null,
   currentUser: JSON.parse(localStorage.getItem('user')) || null,
+  currentUsersGuides: [],
   users: null,
   guide: null,
   guides: [],
@@ -269,6 +273,28 @@ export const reducer = (state = initialState, action) => {
         error: 'Error getting single user',
         isLoading: false,
         fetchingData: false
+      };
+    case GET_GUIDES_BY_USER_START:
+      return {
+        ...state,
+        error: '',
+        isLoading: true,
+        fetchingData: true,
+        currentUsersGuides: []
+      };
+    case GET_GUIDES_BY_USER_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        fetchingData: false,
+        currentUsersGuides: action.payload
+      };
+    case GET_GUIDES_BY_USER_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        fetchingData: false,
+        error: 'Error getting guides by user'
       };
     default:
       return state;

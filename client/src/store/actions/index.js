@@ -187,10 +187,26 @@ export const getSingleUser = id => dispatch => {
   return axiosWithAuth()
     .get(`/api/users/${id}`)
     .then(res => {
-      console.log(res);
       dispatch({ type: GET_SINGLE_USER_SUCCESS, payload: res.data.body });
     })
     .catch(err => {
       dispatch({ type: GET_SINGLE_USER_FAILURE });
+    });
+};
+
+export const GET_GUIDES_BY_USER_START = 'GET_GUIDES_BY_USER_START';
+export const GET_GUIDES_BY_USER_SUCCESS = 'GET_GUIDES_BY_USER_SUCCESS';
+export const GET_GUIDES_BY_USER_FAILURE = 'GET_GUIDES_BY_USER_FAILURE';
+
+export const getGuidesByUserId = userId => dispatch => {
+  dispatch({ type: GET_GUIDES_BY_USER_START });
+  return axiosWithAuth()
+    .get(`/api/guides/user/${userId}`)
+    .then(res => {
+      console.log(res);
+      dispatch({ type: GET_GUIDES_BY_USER_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_GUIDES_BY_USER_FAILURE });
     });
 };
