@@ -42,7 +42,6 @@ const initialState = {
   users: null,
   guide: null,
   guides: [],
-  guideById: null,
   error: '',
   isLoading: false,
   isLoggedIn: localStorage.getItem('token') ? true : false,
@@ -164,7 +163,7 @@ export const reducer = (state = initialState, action) => {
     case GET_GUIDE_BY_ID_SUCCESS:
       return {
         ...state,
-        guideById: action.payload,
+        guide: action.payload,
         error: '',
         isLoading: false,
         fetchingData: false

@@ -21,6 +21,13 @@ body {
   background: linear-gradient(180deg, #e5e5e5 46.22%, #e3e3e3 94.86%);
   a {
     cursor: pointer;
+    text-decoration: none;
+    &:visited {
+      color: black;
+    }
+    &:active {
+      color: #3ab6ec;
+    }
   }
 }
 
@@ -454,6 +461,10 @@ code {
     .my-guide-card-description {
       text-align: left;
       margin-left: 35px;
+      width: 180px;
+      h3 {
+        margin-bottom: 10px;
+      }
     }
     .my-guide-card-edit {
       margin: 0 25px;
@@ -503,14 +514,14 @@ code {
     border-radius: 8px;
   }
   .guide-step {
-    margin-top: 70px;
+    margin-top: 40px;
     .guide-image {
       width: 240px;
       margin: 10px 12px 25px 0;
       border-radius: 8px;
     }
-    h3 {
-      font-size: 1.4rem;
+    p {
+      font-size: 1rem;
     }
   }
 
@@ -528,5 +539,41 @@ code {
   }
   svg {
     margin-right: 5px;
+  }
+}
+
+.my-step-card-container {
+  width: 100%;
+  height: 132px;
+  background: white;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.1);
+  margin: 15px 0;
+  .my-step-card-thumbnail {
+    align-self: stretch;
+    img {
+      width: 100px;
+      height: 100%;
+      object-fit: cover;
+      box-sizing: border-box;
+    }
+  }
+  .my-step-card-description {
+    text-align: left;
+    margin-left: 35px;
+    width: 180px;
+    h3 {
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+    h4 {
+      font-size: 0.8rem;
+    }
+  }
+  .my-step-card-edit {
+    margin: 0 25px;
   }
 }
