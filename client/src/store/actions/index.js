@@ -99,7 +99,7 @@ export const getGuideById = id => dispatch => {
   return axiosWithAuth()
     .get(`/api/guides/${id}`)
     .then(res => {
-      dispatch({ type: GET_GUIDE_BY_ID_SUCCESS, payload: res.data.body });
+      dispatch({ type: GET_GUIDE_BY_ID_SUCCESS, payload: res.data });
     })
     .catch(err => {
       console.log(err);
