@@ -15,12 +15,14 @@ const Guide = ({ match, getGuideById, guide }) => {
   }, []);
 
   if (guide) {
+    console.log(guide);
     return (
       <div className="guide-container">
         <div className="guide-header">
           <h2>{guide.guide_name}</h2>
           <p>
-            by <span>miyah.myles</span> in <span>{guide.guide_category}</span>
+            by <span>{guide.username}</span> in{' '}
+            <span>{guide.guide_category}</span>
           </p>
           <div className="likes-container">
             <Heart />
@@ -34,21 +36,29 @@ const Guide = ({ match, getGuideById, guide }) => {
           <p>{guide.guide_description}</p>
         </div>
         <div className="guide-materials-tools">
+          <br />
           <h3>Materials:</h3>
-          {guide.guide_materials}
+          {guide.guide_materials !== '' ? guide.guide_materials : 'none'}
           <br />
           <br />
           <h3>Tools:</h3>
-          {guide.guide_tools}
+          {guide.guide_tools !== '' ? guide.guide_tools : 'none'}
         </div>
-        <div className="guide-step">
-          <h3>Step 1:</h3>
-          <div className="guides-scroll-container">
-            <img className="guide-image" src={tech1} />
-            <img className="guide-image" src={tech1} />
-            <img className="guide-image" src={tech1} />
-          </div>
-        </div>
+        {guide.steps.map(step => {
+          return (
+            <div className="guide-step">
+              <h3>{`Step ${step.step_number}:`}</h3>
+              <h4>{step.step_title}</h4>
+
+              <div className="guides-scroll-container">
+                <img className="guide-image" src={tech1} />
+                <img className="guide-image" src={tech1} />
+                <img className="guide-image" src={tech1} />
+              </div>
+              <p>{step.step_description}</p>
+            </div>
+          );
+        })}
       </div>
     );
   } else {

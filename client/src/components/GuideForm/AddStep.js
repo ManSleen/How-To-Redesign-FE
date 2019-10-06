@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
 import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
 import { makeStyles } from '@material-ui/core/styles';
 import CameraIcon from '../../assets/icons/CameraIcon';
 import ActionButton from '../../assets/buttons/ActionButton';
+
+import { addStep } from '../../store/actions';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -34,61 +33,47 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const AddStep = ({ history }) => {
+const AddStep = ({ history, addStep, guideSteps, setGuideSteps }) => {
   const classes = useStyles();
-  const inputLabel = React.useRef(null);
-  const [labelWidth, setLabelWidth] = React.useState(0);
 
-  const [guide, setGuide] = useState({
-    guide_name: '',
-    guide_description: '',
-    guide_category: '',
-    guide_keywords: '',
-    guide_materials: ''
+  const [step, setStep] = useState({
+    step_title: '',
+    step_description: '',
+    step_image_url: ''
   });
 
   const handleChange = e => {
-    setGuide({
-      ...guide,
+    setStep({
+      ...step,
       [e.target.name]: e.target.value
     });
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    history.push('/add-step');
+    setGuideSteps([...guideSteps, step]);
+    setStep({
+      step_title: '',
+      step_description: '',
+      step_image_url: ''
+    });
   };
+
   return (
-    <div className="guide-form-container">
-      <div className="guide-photo-upload-input">
-        <h3>Add Instructions</h3>
-      </div>
-      <h4>Step 1</h4>
+    <div className="step-form-container">
       <form onSubmit={handleSubmit}>
         <TextField
           fullWidth
           id="outlined-name"
           label="Title"
-          name="guide_name"
+          name="step_title"
           className={classes.textField}
-          value={guide.guide_name}
+          value={step.step_title}
           onChange={handleChange}
           margin="normal"
           variant="outlined"
           autoComplete="name"
           required
-        />
-        <TextField
-          id="outlined-multiline-static"
-          label="Description"
-          name="guide_description"
-          multiline
-          fullWidth
-          rows="4"
-          onChange={handleChange}
-          className={classes.textField}
-          margin="normal"
-          variant="outlined"
         />
         <div className="guide-photo-upload-input">
           <h4>Upload Instruction Images</h4>
@@ -97,11 +82,21 @@ const AddStep = ({ history }) => {
             <p>Choose Images to upload</p>
           </div>
         </div>
-        <button
-          onClick={() => history.push('/add-step')}
-          type="button"
-          className="add-another-step"
-        >
+        <TextField
+          id="outlined-multiline-static"
+          label="Description"
+          name="step_description"
+          value={step.step_description}
+          multiline
+          fullWidth
+          rows="4"
+          onChange={handleChange}
+          className={classes.textField}
+          margin="normal"
+          variant="outlined"
+        />
+
+        <button type="submit" className="add-another-step">
           <p>Add Step</p>
           <svg
             width="24"
@@ -116,10 +111,12 @@ const AddStep = ({ history }) => {
             />
           </svg>
         </button>
-        <ActionButton type="submit" text="Create Guide" />
       </form>
     </div>
   );
 };
 
-export default AddStep;
+export default connect(
+  null,
+  { addStep }
+)(AddStep);

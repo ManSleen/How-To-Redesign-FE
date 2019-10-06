@@ -136,7 +136,7 @@ export const addGuide = guide => dispatch => {
     .post('/api/guides', guide)
     .then(res => {
       dispatch({ type: ADD_GUIDE_SUCCESS, payload: res.data.body });
-      return true;
+      return res;
     })
     .catch(err => {
       console.log(err);
@@ -169,7 +169,7 @@ export const ADD_STEP_FAILURE = 'ADD_STEP_FAILURE';
 export const addStep = (step, id) => dispatch => {
   dispatch({ type: ADD_STEP_START });
   return axiosWithAuth()
-    .post(`/api/guides/${id}/steps`, step)
+    .post(`/api/steps`, step)
     .then(res => {
       dispatch({ type: ADD_STEP_SUCCESS, payload: res.data.body });
     })
