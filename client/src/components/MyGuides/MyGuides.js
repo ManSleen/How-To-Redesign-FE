@@ -13,7 +13,7 @@ const MyGuides = ({ getGuidesByUserId, user, guides }) => {
     <div className="my-guides-container">
       <h2>My Guides</h2>
       {guides.map(guide => {
-        return <MyGuideCard guide={guide} />;
+        return <MyGuideCard key={guide.id} guide={guide} />;
       })}
     </div>
   );

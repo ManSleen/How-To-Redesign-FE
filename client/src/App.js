@@ -29,7 +29,7 @@ function App() {
       <Route exact path="/add-step" component={AddStep} />
       <Route exact path="/browse" component={BrowseGuides} />
       <Route exact path="/my-guides" component={MyGuides} />
-      <Route exact path="/guide" component={Guide} />
+      <Route exact path="/guide/:id" component={Guide} />
       <Footer />
     </div>
   );

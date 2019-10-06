@@ -21,6 +21,13 @@ body {
   background: linear-gradient(180deg, #e5e5e5 46.22%, #e3e3e3 94.86%);
   a {
     cursor: pointer;
+    text-decoration: none;
+    &:visited {
+      color: black;
+    }
+    &:active {
+      color: #3ab6ec;
+    }
   }
 }
 
@@ -454,6 +461,9 @@ code {
     .my-guide-card-description {
       text-align: left;
       margin-left: 35px;
+      h3 {
+        margin-bottom: 10px;
+      }
     }
     .my-guide-card-edit {
       margin: 0 25px;
