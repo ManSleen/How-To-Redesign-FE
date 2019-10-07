@@ -92,7 +92,7 @@ const GuideForm = ({ history, addGuide, user, addStep }) => {
       <TextField
         fullWidth
         id="outlined-name"
-        label="Title"
+        label="Guide Title"
         name="guide_name"
         className={classes.textField}
         value={guide.guide_name}
@@ -112,7 +112,7 @@ const GuideForm = ({ history, addGuide, user, addStep }) => {
       </div>
       <TextField
         id="outlined-multiline-static"
-        label="Description"
+        label="Guide Description"
         name="guide_description"
         multiline
         fullWidth
@@ -189,6 +189,8 @@ const GuideForm = ({ history, addGuide, user, addStep }) => {
         variant="outlined"
         form="guide-form"
       />
+      <br />
+      <br />
       <h3>Add Instructions</h3>
       {guideSteps.map((step, index) => (
         <StepCard key={index} step={step} />
