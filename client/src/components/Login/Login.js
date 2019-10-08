@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Login = ({ history, login }) => {
+const Login = ({ history, login, error }) => {
   const classes = useStyles();
 
   const [user, setUser] = useState({
@@ -49,6 +49,7 @@ const Login = ({ history, login }) => {
   return (
     <div className="login-form-container">
       <h3>Log In</h3>
+      {error && <p className="error">{error}</p>}
       <form onSubmit={handleSubmit}>
         <TextField
           fullWidth
@@ -82,7 +83,13 @@ const Login = ({ history, login }) => {
   );
 };
 
+const mapStateToProps = state => {
+  return {
+    error: state.error
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   { login }
 )(Login);

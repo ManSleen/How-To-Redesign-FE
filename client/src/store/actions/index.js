@@ -63,30 +63,11 @@ export const getGuides = () => dispatch => {
   return axiosWithAuth()
     .get('/api/guides')
     .then(res => {
-      dispatch({ type: GET_GUIDES_SUCCESS, payload: res.data.body });
+      dispatch({ type: GET_GUIDES_SUCCESS, payload: res.data });
     })
     .catch(err => {
       console.log(err);
       dispatch({ type: GET_GUIDES_FAILURE });
-    });
-};
-
-export const GET_USERS_START = 'GET_USERS_START';
-export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
-export const GET_USERS_FAILURE = 'GET_USERS_FAILURE';
-
-export const getUsers = () => dispatch => {
-  dispatch({ type: GET_USERS_START });
-
-  return axiosWithAuth()
-    .get('/api/users')
-    .then(res => {
-      dispatch({ type: GET_USERS_SUCCESS, payload: res.data.body });
-      return true;
-    })
-    .catch(err => {
-      console.log(err);
-      dispatch({ type: GET_USERS_FAILURE });
     });
 };
 
@@ -104,6 +85,23 @@ export const getGuideById = id => dispatch => {
     .catch(err => {
       console.log(err);
       dispatch({ type: GET_GUIDE_BY_ID_FAILURE });
+    });
+};
+
+export const GET_GUIDES_BY_USER_START = 'GET_GUIDES_BY_USER_START';
+export const GET_GUIDES_BY_USER_SUCCESS = 'GET_GUIDES_BY_USER_SUCCESS';
+export const GET_GUIDES_BY_USER_FAILURE = 'GET_GUIDES_BY_USER_FAILURE';
+
+export const getGuidesByUserId = userId => dispatch => {
+  dispatch({ type: GET_GUIDES_BY_USER_START });
+  return axiosWithAuth()
+    .get(`/api/guides/user/${userId}`)
+    .then(res => {
+      console.log(res);
+      dispatch({ type: GET_GUIDES_BY_USER_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_GUIDES_BY_USER_FAILURE });
     });
 };
 
@@ -178,6 +176,25 @@ export const addStep = (step, id) => dispatch => {
     });
 };
 
+export const GET_USERS_START = 'GET_USERS_START';
+export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
+export const GET_USERS_FAILURE = 'GET_USERS_FAILURE';
+
+export const getUsers = () => dispatch => {
+  dispatch({ type: GET_USERS_START });
+
+  return axiosWithAuth()
+    .get('/api/users')
+    .then(res => {
+      dispatch({ type: GET_USERS_SUCCESS, payload: res.data.body });
+      return true;
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({ type: GET_USERS_FAILURE });
+    });
+};
+
 export const GET_SINGLE_USER_START = 'GET_SINGLE_USER_START';
 export const GET_SINGLE_USER_SUCCESS = 'GET_SINGLE_USER_SUCCESS';
 export const GET_SINGLE_USER_FAILURE = 'GET_SINGLE_USER_FAILURE';
@@ -191,22 +208,5 @@ export const getSingleUser = id => dispatch => {
     })
     .catch(err => {
       dispatch({ type: GET_SINGLE_USER_FAILURE });
-    });
-};
-
-export const GET_GUIDES_BY_USER_START = 'GET_GUIDES_BY_USER_START';
-export const GET_GUIDES_BY_USER_SUCCESS = 'GET_GUIDES_BY_USER_SUCCESS';
-export const GET_GUIDES_BY_USER_FAILURE = 'GET_GUIDES_BY_USER_FAILURE';
-
-export const getGuidesByUserId = userId => dispatch => {
-  dispatch({ type: GET_GUIDES_BY_USER_START });
-  return axiosWithAuth()
-    .get(`/api/guides/user/${userId}`)
-    .then(res => {
-      console.log(res);
-      dispatch({ type: GET_GUIDES_BY_USER_SUCCESS, payload: res.data });
-    })
-    .catch(err => {
-      dispatch({ type: GET_GUIDES_BY_USER_FAILURE });
     });
 };
