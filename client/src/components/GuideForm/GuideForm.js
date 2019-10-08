@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
+import { useDropzone } from 'react-dropzone';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
@@ -46,9 +47,22 @@ const GuideForm = ({ history, addGuide, user, addStep }) => {
   const classes = useStyles();
   const inputLabel = React.useRef(null);
   const [labelWidth, setLabelWidth] = React.useState(0);
+
   React.useEffect(() => {
     setLabelWidth(inputLabel.current.offsetWidth);
   }, []);
+
+  const onDrop = useCallback(acceptedFiles => {
+    // setFiles(
+    //   acceptedFiles.map(file =>
+    //     Object.assign(file, {
+    //       preview: URL.createObjectURL(file)
+    //     })
+    //   )
+    // );
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   const [guide, setGuide] = useState({
     guide_creator: user ? user.id : '',

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 
 import FloppyEmoji from '../../assets/icons/FloppyEmoji';
 import Palette from '../../assets/icons/Palette';
@@ -6,59 +7,66 @@ import Tent from '../../assets/icons/Tent';
 import PizzaEmoji from '../../assets/icons/PizzaEmoji';
 import GuideCard from './GuideCard';
 
-const BrowseGuides = () => {
-  return (
-    <div className="guide-form-container">
-      <h3>Browse Guides</h3>
-      <div className="guide-category-section tech">
-        <h4>Tech</h4>
-        <FloppyEmoji />
-        <div className="guides-scroll-container">
-          <GuideCard />
-          <GuideCard />
-          <GuideCard />
-          <GuideCard />
-          <GuideCard />
+import { getGuides } from '../../store/actions';
+
+const BrowseGuides = ({ getGuides, guides, isLoading }) => {
+  useEffect(() => {
+    getGuides();
+  }, []);
+
+  const filterGuides = filter => {
+    const matchingGuides = guides
+      .filter(el => el.guide_category.toLowerCase() === filter)
+      .map(guide => {
+        return <GuideCard key={guide.id} guide={guide} />;
+      });
+    return matchingGuides;
+  };
+
+  if (guides && !isLoading) {
+    return (
+      <div className="guide-form-container">
+        <h3>Browse Guides</h3>
+        <div className="guide-category-section tech">
+          <h4>Tech</h4>
+          <FloppyEmoji />
+          <div className="guides-scroll-container">{filterGuides('tech')}</div>
+        </div>
+        <div className="guide-category-section craft">
+          <h4>Craft</h4>
+          <Palette />
+          <div className="guides-scroll-container">{filterGuides('craft')}</div>
+          <div className="guides-scroll-container"></div>
+        </div>
+        <div className="guide-category-section outdoors">
+          <h4>Outdoors</h4>
+          <Tent />
+          <div className="guides-scroll-container">
+            {filterGuides('outdoors')}
+          </div>
+          <div className="guides-scroll-container"></div>
+        </div>
+        <div className="guide-category-section food">
+          <h4>Food</h4>
+          <PizzaEmoji />
+          <div className="guides-scroll-container">{filterGuides('food')}</div>
+          <div className="guides-scroll-container"></div>
         </div>
       </div>
-      <div className="guide-category-section craft">
-        <h4>Craft</h4>
-        <Palette />
-        <div className="guides-scroll-container">
-          <GuideCard />
-          <GuideCard />
-          <GuideCard />
-          <GuideCard />
-          <GuideCard />
-        </div>
-        <div className="guides-scroll-container"></div>
-      </div>
-      <div className="guide-category-section outdoors">
-        <h4>Outdoors</h4>
-        <Tent />
-        <div className="guides-scroll-container">
-          <GuideCard />
-          <GuideCard />
-          <GuideCard />
-          <GuideCard />
-          <GuideCard />
-        </div>
-        <div className="guides-scroll-container"></div>
-      </div>
-      <div className="guide-category-section food">
-        <h4>Food</h4>
-        <PizzaEmoji />
-        <div className="guides-scroll-container">
-          <GuideCard />
-          <GuideCard />
-          <GuideCard />
-          <GuideCard />
-          <GuideCard />
-        </div>
-        <div className="guides-scroll-container"></div>
-      </div>
-    </div>
-  );
+    );
+  } else {
+    return <div>Loading...</div>;
+  }
 };
 
-export default BrowseGuides;
+const mapStateToProps = state => {
+  return {
+    guides: state.guides,
+    isLoading: state.isLoading
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { getGuides }
+)(BrowseGuides);
