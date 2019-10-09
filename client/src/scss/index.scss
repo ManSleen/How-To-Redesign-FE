@@ -344,6 +344,17 @@ code {
 
 .guide-photo-upload-input {
   margin: 20px 0;
+  .drop-zone-image-upload.active {
+    border: 8px dashed #0db1f6;
+    background-color: #d4d4d4;
+    p {
+      font-size: 1.5rem;
+    }
+    svg {
+      width: 45px;
+      height: 45px;
+    }
+  }
   .drop-zone-image-upload {
     background: #c4c4c4;
     box-shadow: inset 0px 0px 15px rgba(0, 0, 0, 0.05);
