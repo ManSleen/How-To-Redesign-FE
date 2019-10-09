@@ -346,13 +346,24 @@ code {
   margin: 20px 0;
   .drop-zone-image-upload.active {
     border: 8px dashed #0db1f6;
-    background-color: #d4d4d4;
+    background-color: #c1ddc9;
     p {
       font-size: 1.5rem;
+      color: green;
     }
     svg {
-      width: 45px;
-      height: 45px;
+      display: none;
+    }
+  }
+  .drop-zone-image-upload.rejected {
+    border: 8px dashed red;
+    background-color: #ce9a9a;
+    p {
+      font-size: 1.5rem;
+      color: red;
+    }
+    svg {
+      display: none;
     }
   }
   .drop-zone-image-upload {

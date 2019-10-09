@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from 'react';
-// import { useDropzone } from 'react-dropzone';
-import Dropzone from 'react-dropzone';
+import { useDropzone } from 'react-dropzone';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
@@ -45,6 +44,26 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const GuideForm = ({ history, addGuide, user, addStep }) => {
+  const maxImageSize = 5242880;
+
+  const {
+    isDragActive,
+    getRootProps,
+    getInputProps,
+    isDragReject,
+    acceptedFiles,
+    rejectedFiles
+  } = useDropzone({
+    accept: 'image/*',
+    onDrop: (acceptedFiles, rejectedFiles) => {
+      console.log('acceptedFiles', acceptedFiles);
+      console.log('rejectedFiles', rejectedFiles);
+    }
+  });
+
+  const isFileTooLarge =
+    rejectedFiles.length > 0 && rejectedFiles[0].size > maxImageSize;
+
   const classes = useStyles();
   const inputLabel = React.useRef(null);
   const [labelWidth, setLabelWidth] = React.useState(0);
@@ -52,10 +71,6 @@ const GuideForm = ({ history, addGuide, user, addStep }) => {
   React.useEffect(() => {
     setLabelWidth(inputLabel.current.offsetWidth);
   }, []);
-
-  const onDrop = acceptedFiles => {
-    console.log(acceptedFiles);
-  };
 
   const [guide, setGuide] = useState({
     guide_creator: user ? user.id : '',
@@ -112,25 +127,31 @@ const GuideForm = ({ history, addGuide, user, addStep }) => {
       />
       <div className="guide-photo-upload-input">
         <h4>Upload Project Images</h4>
-        <Dropzone onDrop={onDrop}>
-          {({ getRootProps, getInputProps, isDragActive }) => (
-            <div {...getRootProps()}>
-              <input {...getInputProps()} />
-              <div
-                className={`drop-zone-image-upload${
-                  isDragActive ? ' active' : ''
-                }`}
-              >
-                <CameraIcon />
-                <p>
-                  {isDragActive
-                    ? 'Drop it here my dude!'
-                    : 'Click or drag a file to upload'}
-                </p>
+
+        <div {...getRootProps({ className: 'dropzone' })}>
+          <input {...getInputProps()} />
+          <div
+            className={`drop-zone-image-upload${isDragActive ? ' active' : ''}${
+              isDragReject ? ' rejected' : ''
+            }`}
+          >
+            <CameraIcon />
+
+            {!isDragActive && <p>Click or drag a file to upload</p>}
+            {isDragActive && !isDragReject && <p>Drop it here my dude!</p>}
+
+            {isFileTooLarge && <div className="error">File is too large</div>}
+            {isDragReject && (
+              <div className="error">
+                <p>Images only please</p>
               </div>
-            </div>
-          )}
-        </Dropzone>
+            )}
+            <ul>
+              {acceptedFiles.length > 0 &&
+                acceptedFiles.map(acceptedFile => <li>{acceptedFile.name}</li>)}
+            </ul>
+          </div>
+        </div>
       </div>
       <TextField
         id="outlined-multiline-static"
