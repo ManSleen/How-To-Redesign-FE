@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
-import { useDropzone } from 'react-dropzone';
+// import { useDropzone } from 'react-dropzone';
+import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
@@ -52,17 +53,9 @@ const GuideForm = ({ history, addGuide, user, addStep }) => {
     setLabelWidth(inputLabel.current.offsetWidth);
   }, []);
 
-  const onDrop = useCallback(acceptedFiles => {
-    // setFiles(
-    //   acceptedFiles.map(file =>
-    //     Object.assign(file, {
-    //       preview: URL.createObjectURL(file)
-    //     })
-    //   )
-    // );
-  }, []);
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const onDrop = acceptedFiles => {
+    console.log(acceptedFiles);
+  };
 
   const [guide, setGuide] = useState({
     guide_creator: user ? user.id : '',
@@ -119,10 +112,25 @@ const GuideForm = ({ history, addGuide, user, addStep }) => {
       />
       <div className="guide-photo-upload-input">
         <h4>Upload Project Images</h4>
-        <div className="drop-zone-image-upload">
-          <CameraIcon />
-          <p>Choose Images to upload</p>
-        </div>
+        <Dropzone onDrop={onDrop}>
+          {({ getRootProps, getInputProps, isDragActive }) => (
+            <div {...getRootProps()}>
+              <input {...getInputProps()} />
+              <div
+                className={`drop-zone-image-upload${
+                  isDragActive ? ' active' : ''
+                }`}
+              >
+                <CameraIcon />
+                <p>
+                  {isDragActive
+                    ? 'Drop it here my dude!'
+                    : 'Click or drag a file to upload'}
+                </p>
+              </div>
+            </div>
+          )}
+        </Dropzone>
       </div>
       <TextField
         id="outlined-multiline-static"
