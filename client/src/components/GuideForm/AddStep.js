@@ -97,7 +97,7 @@ const AddStep = ({ history, addStep, guideSteps, setGuideSteps }) => {
           required
         />
         <div className="guide-photo-upload-input">
-          <h4>Upload Instruction Images</h4>
+          <h4>Upload an Image</h4>
 
           <div {...getRootProps({ className: 'dropzone' })}>
             <input {...getInputProps()} />
@@ -117,13 +117,13 @@ const AddStep = ({ history, addStep, guideSteps, setGuideSteps }) => {
                   <p>Images only please</p>
                 </div>
               )}
-              <ul>
-                {acceptedFiles.length > 0 &&
-                  acceptedFiles.map(acceptedFile => (
-                    <li>{acceptedFile.name}</li>
-                  ))}
-              </ul>
             </div>
+          </div>
+          <div className="upload-image-list">
+            <ul>
+              {acceptedFiles.length > 0 &&
+                acceptedFiles.map(acceptedFile => <li>{acceptedFile.name}</li>)}
+            </ul>
           </div>
         </div>
         <TextField

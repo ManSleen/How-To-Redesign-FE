@@ -22,7 +22,11 @@ const Guide = ({ match, getGuideById, guide }) => {
           <h2>{guide.guide_name}</h2>
           <p>
             by <span>{guide.username}</span> in{' '}
-            <span>{guide.guide_category}</span>
+            <span>
+              {guide.guide_category === ''
+                ? 'uncategorized'
+                : guide.guide_category}
+            </span>
           </p>
           <div className="likes-container">
             <Heart />

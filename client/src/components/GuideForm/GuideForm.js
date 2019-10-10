@@ -94,16 +94,20 @@ const GuideForm = ({ history, addGuide, user, addStep }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    addGuide(guide).then(res => {
-      if (res) {
-        guideSteps.map((step, index) => {
-          step.guide_id = res.data.id;
-          step.step_number = index + 1;
-          addStep(step);
-        });
-        console.log(guideSteps);
-      }
-    });
+    let guideId;
+    addGuide(guide)
+      .then(res => {
+        if (res) {
+          guideId = res.data.id;
+          guideSteps.map((step, index) => {
+            step.guide_id = res.data.id;
+            step.step_number = index + 1;
+            addStep(step);
+          });
+          console.log(guideSteps);
+        }
+      })
+      .then(() => history.push(`/guide/${guideId}`));
   };
 
   return (
@@ -126,7 +130,7 @@ const GuideForm = ({ history, addGuide, user, addStep }) => {
         form="guide-form"
       />
       <div className="guide-photo-upload-input">
-        <h4>Upload Project Images</h4>
+        <h4>Upload a Project Image</h4>
 
         <div {...getRootProps({ className: 'dropzone' })}>
           <input {...getInputProps()} />
@@ -146,11 +150,13 @@ const GuideForm = ({ history, addGuide, user, addStep }) => {
                 <p>Images only please</p>
               </div>
             )}
-            <ul>
-              {acceptedFiles.length > 0 &&
-                acceptedFiles.map(acceptedFile => <li>{acceptedFile.name}</li>)}
-            </ul>
           </div>
+        </div>
+        <div className="upload-image-list">
+          <ul>
+            {acceptedFiles.length > 0 &&
+              acceptedFiles.map(acceptedFile => <li>{acceptedFile.name}</li>)}
+          </ul>
         </div>
       </div>
       <TextField
@@ -239,7 +245,13 @@ const GuideForm = ({ history, addGuide, user, addStep }) => {
         <StepCard key={index} step={step} />
       ))}
       <AddStep guideSteps={guideSteps} setGuideSteps={setGuideSteps} />
-      <input type="submit" value="Create Guide" form="guide-form" />
+      <input
+        color="white"
+        className="create-guide"
+        type="submit"
+        value="Create Guide"
+        form="guide-form"
+      />
       {/* <ActionButton form="guide-form" type="submit" text="Next" /> */}
     </div>
   );
