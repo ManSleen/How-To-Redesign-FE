@@ -13,7 +13,7 @@ import { getGuides } from '../../store/actions';
 const BrowseGuides = ({ getGuides, guides, isLoading }) => {
   useEffect(() => {
     getGuides();
-  }, []);
+  }, [getGuides]);
 
   const filterGuides = filter => {
     if (guides && !isLoading) {

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { connect } from 'react-redux';
 import moment from 'moment';
@@ -10,13 +10,13 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import { makeStyles } from '@material-ui/core/styles';
+
 import CameraIcon from '../../assets/icons/CameraIcon';
-import ActionButton from '../../assets/buttons/ActionButton';
-import AddStep from './AddStep';
+
+import AddStep from './AddStep.js';
+import StepCard from './StepCard.js';
 
 import { addGuide, addStep } from '../../store/actions';
-import MyGuideCard from '../MyGuides/MyGuideCard';
-import StepCard from './StepCard';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -110,6 +110,7 @@ const GuideForm = ({
             step.guide_id = res.data.id;
             step.step_number = index + 1;
             addStep(step);
+            return step;
           });
           console.log(guideSteps);
         }

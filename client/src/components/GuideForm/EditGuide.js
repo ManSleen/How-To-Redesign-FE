@@ -9,7 +9,8 @@ const EditGuide = ({ history, match, getGuideById, guide }) => {
   console.log(id);
   useEffect(() => {
     getGuideById(id);
-  }, []);
+  }, [getGuideById, id]);
+
   if (guide) {
     return (
       <div className="add-guide-container">
