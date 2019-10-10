@@ -3,6 +3,8 @@ import { useDropzone } from 'react-dropzone';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
+import axios from 'axios';
+import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
 
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -101,6 +103,24 @@ const GuideForm = ({
 
   const handleSubmit = e => {
     e.preventDefault();
+    if (isEditing) {
+      editGuide();
+    } else {
+      createGuide();
+    }
+  };
+
+  const handleImageUpload = async (file, guideId) => {
+    try {
+      const {
+        data: { key, url }
+      } = await axiosWithAuth().post(`/api/photos/signed`, {
+        id: guideId
+      });
+    } catch (err) {}
+  };
+
+  const createGuide = () => {
     let guideId;
     addGuide(guide)
       .then(res => {
@@ -117,6 +137,8 @@ const GuideForm = ({
       })
       .then(() => history.push(`/guide/${guideId}`));
   };
+
+  const editGuide = () => {};
 
   return (
     <div className="guide-form-container">
