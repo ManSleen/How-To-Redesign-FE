@@ -345,11 +345,14 @@ code {
 .guide-photo-upload-input {
   margin: 20px 0;
   .drop-zone-image-upload.active {
-    border: 8px dashed #0db1f6;
+    border: 8px dashed #35a93a;
     background-color: #c1ddc9;
+    box-sizing: border-box;
+    transition: ease-in 0.05s;
     p {
       font-size: 1.5rem;
       color: green;
+      transition: ease-in 0.05s;
     }
     svg {
       display: none;
