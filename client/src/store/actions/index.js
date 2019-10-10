@@ -1,5 +1,6 @@
 import { axiosWithAuth } from '../../utilities/axiosWithAuth';
 
+//AUTH ACTIONS
 export const SIGN_UP_START = 'SIGN_UP_START';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
@@ -53,6 +54,7 @@ export const logout = () => dispatch => {
   localStorage.removeItem('user');
 };
 
+//GUIDES ACTIONS
 export const GET_GUIDES_START = 'GET_GUIDES_START';
 export const GET_GUIDES_SUCCESS = 'GET_GUIDES_SUCCESS';
 export const GET_GUIDES_FAILURE = 'GET_GUIDES_FAILURE';
@@ -176,6 +178,7 @@ export const addStep = (step, id) => dispatch => {
     });
 };
 
+//USERS ACTIONS
 export const GET_USERS_START = 'GET_USERS_START';
 export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
 export const GET_USERS_FAILURE = 'GET_USERS_FAILURE';
@@ -211,6 +214,7 @@ export const getSingleUser = id => dispatch => {
     });
 };
 
+//PHOTOS ACTIONS
 export const GET_SINGLE_PHOTO_START = 'GET_SINGLE_PHOTO_START';
 export const GET_SINGLE_PHOTO_SUCCESS = 'GET_SINGLE_PHOTO_SUCCESS';
 export const GET_SINGLE_PHOTO_FAILURE = 'GET_SINGLE_PHOTO_FAILURE';
