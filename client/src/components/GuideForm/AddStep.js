@@ -5,7 +5,6 @@ import { useDropzone } from 'react-dropzone';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import CameraIcon from '../../assets/icons/CameraIcon';
-import ActionButton from '../../assets/buttons/ActionButton';
 
 import { addStep } from '../../store/actions';
 

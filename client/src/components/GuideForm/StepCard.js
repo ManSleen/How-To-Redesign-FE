@@ -8,7 +8,7 @@ const StepCard = ({ step }) => {
   return (
     <div className="my-step-card-container">
       <div className="my-step-card-thumbnail">
-        <img src={tech1} />
+        <img alt="step cover" src={tech1} />
       </div>
       <div className="my-step-card-description">
         <h3>

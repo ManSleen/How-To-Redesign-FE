@@ -1,8 +1,10 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
+import axios from 'axios';
+import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
 
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -10,13 +12,13 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import { makeStyles } from '@material-ui/core/styles';
+
 import CameraIcon from '../../assets/icons/CameraIcon';
-import ActionButton from '../../assets/buttons/ActionButton';
-import AddStep from './AddStep';
+
+import AddStep from './AddStep.js';
+import StepCard from './StepCard.js';
 
 import { addGuide, addStep } from '../../store/actions';
-import MyGuideCard from '../MyGuides/MyGuideCard';
-import StepCard from './StepCard';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -101,6 +103,24 @@ const GuideForm = ({
 
   const handleSubmit = e => {
     e.preventDefault();
+    if (isEditing) {
+      editGuide();
+    } else {
+      createGuide();
+    }
+  };
+
+  const handleImageUpload = async (file, guideId) => {
+    try {
+      const {
+        data: { key, url }
+      } = await axiosWithAuth().post(`/api/photos/signed`, {
+        id: guideId
+      });
+    } catch (err) {}
+  };
+
+  const createGuide = () => {
     let guideId;
     addGuide(guide)
       .then(res => {
@@ -110,12 +130,15 @@ const GuideForm = ({
             step.guide_id = res.data.id;
             step.step_number = index + 1;
             addStep(step);
+            return step;
           });
           console.log(guideSteps);
         }
       })
       .then(() => history.push(`/guide/${guideId}`));
   };
+
+  const editGuide = () => {};
 
   return (
     <div className="guide-form-container">

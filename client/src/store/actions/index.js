@@ -1,5 +1,6 @@
 import { axiosWithAuth } from '../../utilities/axiosWithAuth';
 
+//AUTH ACTIONS
 export const SIGN_UP_START = 'SIGN_UP_START';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
@@ -53,6 +54,7 @@ export const logout = () => dispatch => {
   localStorage.removeItem('user');
 };
 
+//GUIDES ACTIONS
 export const GET_GUIDES_START = 'GET_GUIDES_START';
 export const GET_GUIDES_SUCCESS = 'GET_GUIDES_SUCCESS';
 export const GET_GUIDES_FAILURE = 'GET_GUIDES_FAILURE';
@@ -176,6 +178,7 @@ export const addStep = (step, id) => dispatch => {
     });
 };
 
+//USERS ACTIONS
 export const GET_USERS_START = 'GET_USERS_START';
 export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
 export const GET_USERS_FAILURE = 'GET_USERS_FAILURE';
@@ -208,5 +211,74 @@ export const getSingleUser = id => dispatch => {
     })
     .catch(err => {
       dispatch({ type: GET_SINGLE_USER_FAILURE });
+    });
+};
+
+//PHOTOS ACTIONS
+export const GET_SINGLE_PHOTO_START = 'GET_SINGLE_PHOTO_START';
+export const GET_SINGLE_PHOTO_SUCCESS = 'GET_SINGLE_PHOTO_SUCCESS';
+export const GET_SINGLE_PHOTO_FAILURE = 'GET_SINGLE_PHOTO_FAILURE';
+
+export const getSinglePhoto = id => dispatch => {
+  dispatch({ type: GET_SINGLE_PHOTO_START });
+  return axiosWithAuth()
+    .get(`/api/photos/one/${id}`)
+    .then(res => {
+      console.log('getSinglePhoto res', res);
+      dispatch({ type: GET_SINGLE_PHOTO_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_SINGLE_PHOTO_FAILURE });
+    });
+};
+
+export const GET_GUIDE_PHOTOS_START = 'GET_GUIDE_PHOTOS_START';
+export const GET_GUIDE_PHOTOS_SUCCESS = 'GET_GUIDE_PHOTOS_SUCCESS';
+export const GET_GUIDE_PHOTOS_FAILURE = 'GET_GUIDE_PHOTOS_FAILURE';
+
+export const getGuidePhotos = guideId => dispatch => {
+  dispatch({ type: GET_GUIDE_PHOTOS_START });
+  return axiosWithAuth()
+    .get(`/api/photos/${guideId}`)
+    .then(res => {
+      console.log('getGuidePhotos res', res);
+      dispatch({ type: GET_GUIDE_PHOTOS_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_GUIDE_PHOTOS_FAILURE });
+    });
+};
+
+export const ADD_PHOTO_START = 'ADD_PHOTO_START';
+export const ADD_PHOTO_SUCCESS = 'ADD_PHOTO_SUCCESS';
+export const ADD_PHOTO_FAILURE = 'ADD_PHOTO_FAILURE';
+
+export const addPhoto = photo => dispatch => {
+  dispatch({ type: ADD_PHOTO_START });
+  return axiosWithAuth()
+    .post('/api/photos/', photo)
+    .then(res => {
+      console.log('addPhoto res', res);
+      dispatch({ type: ADD_PHOTO_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: ADD_PHOTO_FAILURE });
+    });
+};
+
+export const DELETE_PHOTO_START = 'DELETE_PHOTO_START';
+export const DELETE_PHOTO_SUCCESS = 'DELETE_PHOTO_SUCCESS';
+export const DELETE_PHOTO_FAILURE = 'DELETE_PHOTO_FAILURE';
+
+export const deletePhoto = id => dispatch => {
+  dispatch({ type: DELETE_PHOTO_START });
+  return axiosWithAuth()
+    .delete(`/api/photos/${id}`)
+    .then(res => {
+      console.log('deletePhoto res', res);
+      dispatch({ type: DELETE_PHOTO_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: DELETE_PHOTO_FAILURE });
     });
 };

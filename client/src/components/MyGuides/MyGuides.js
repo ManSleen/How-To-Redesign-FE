@@ -8,7 +8,7 @@ import { getGuidesByUserId } from '../../store/actions';
 const MyGuides = ({ getGuidesByUserId, user, guides }) => {
   useEffect(() => {
     getGuidesByUserId(user.id);
-  }, []);
+  }, [getGuidesByUserId, user.id]);
   return (
     <div className="my-guides-container">
       <h2>My Guides</h2>

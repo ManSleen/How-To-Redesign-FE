@@ -12,7 +12,7 @@ const Guide = ({ match, getGuideById, guide }) => {
 
   useEffect(() => {
     getGuideById(id);
-  }, []);
+  }, [getGuideById, id]);
 
   if (guide) {
     console.log(guide);
@@ -52,9 +52,9 @@ const Guide = ({ match, getGuideById, guide }) => {
             <div className="guide-step">
               <h3>{`Step ${step.step_number}: ${step.step_title}`}</h3>
               <div className="guides-scroll-container">
-                <img className="guide-image" src={tech1} />
-                <img className="guide-image" src={tech1} />
-                <img className="guide-image" src={tech1} />
+                <img alt="" className="guide-image" src={tech1} />
+                <img alt="" className="guide-image" src={tech1} />
+                <img alt="" className="guide-image" src={tech1} />
               </div>
               <p>{step.step_description}</p>
             </div>

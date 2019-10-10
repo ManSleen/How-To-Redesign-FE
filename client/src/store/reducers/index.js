@@ -32,7 +32,19 @@ import {
   GET_SINGLE_USER_FAILURE,
   GET_GUIDES_BY_USER_START,
   GET_GUIDES_BY_USER_SUCCESS,
-  GET_GUIDES_BY_USER_FAILURE
+  GET_GUIDES_BY_USER_FAILURE,
+  GET_SINGLE_PHOTO_START,
+  GET_SINGLE_PHOTO_SUCCESS,
+  GET_SINGLE_PHOTO_FAILURE,
+  GET_GUIDE_PHOTOS_START,
+  GET_GUIDE_PHOTOS_SUCCESS,
+  GET_GUIDE_PHOTOS_FAILURE,
+  ADD_PHOTO_START,
+  ADD_PHOTO_SUCCESS,
+  ADD_PHOTO_FAILURE,
+  DELETE_PHOTO_START,
+  DELETE_PHOTO_SUCCESS,
+  DELETE_PHOTO_FAILURE
 } from '../actions';
 
 const initialState = {
@@ -45,7 +57,9 @@ const initialState = {
   error: '',
   isLoading: false,
   isLoggedIn: localStorage.getItem('token') ? true : false,
-  fetchingData: false
+  fetchingData: false,
+  photo: null,
+  guidePhotos: null
 };
 
 export const reducer = (state = initialState, action) => {
@@ -293,6 +307,83 @@ export const reducer = (state = initialState, action) => {
         isLoading: false,
         fetchingData: false,
         error: 'Error getting guides by user'
+      };
+
+    case GET_SINGLE_PHOTO_START:
+      return {
+        ...state,
+        isLoading: true,
+        error: null,
+        photo: null
+      };
+    case GET_SINGLE_PHOTO_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        error: null,
+        photo: action.payload
+      };
+    case GET_SINGLE_PHOTO_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+    case GET_GUIDE_PHOTOS_START:
+      return {
+        ...state,
+        isLoading: true,
+        error: null,
+        guidePhotos: null
+      };
+    case GET_GUIDE_PHOTOS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        error: null,
+        guidePhotos: action.payload
+      };
+    case GET_GUIDE_PHOTOS_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+    case ADD_PHOTO_START:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case ADD_PHOTO_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        error: null
+      };
+    case ADD_PHOTO_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+    case DELETE_PHOTO_START:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case DELETE_PHOTO_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        error: null
+      };
+    case DELETE_PHOTO_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
       };
     default:
       return state;

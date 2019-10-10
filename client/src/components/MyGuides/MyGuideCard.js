@@ -11,7 +11,7 @@ const MyGuideCard = ({ guide }) => {
     <Link to={`/guide/${guide.id}`}>
       <div className="my-guide-card-container">
         <div className="my-guide-card-thumbnail">
-          <img src={tech1} />
+          <img alt="my guide thumbnail" src={tech1} />
         </div>
         <div className="my-guide-card-description">
           <h3>
