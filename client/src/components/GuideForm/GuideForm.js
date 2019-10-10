@@ -43,7 +43,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const GuideForm = ({ history, addGuide, user, addStep }) => {
+const GuideForm = ({
+  history,
+  addGuide,
+  user,
+  addStep,
+  isEditing,
+  currentGuide
+}) => {
   const maxImageSize = 5242880;
 
   const {
@@ -74,12 +81,12 @@ const GuideForm = ({ history, addGuide, user, addStep }) => {
 
   const [guide, setGuide] = useState({
     guide_creator: user ? user.id : '',
-    guide_name: '',
-    guide_description: '',
-    guide_category: '',
-    guide_keywords: '',
-    guide_materials: '',
-    guide_tools: '',
+    guide_name: isEditing ? currentGuide.guide_name : '',
+    guide_description: isEditing ? currentGuide.guide_description : '',
+    guide_category: isEditing ? currentGuide.guide_category : '',
+    guide_keywords: isEditing ? currentGuide.guide_keywords : '',
+    guide_materials: isEditing ? currentGuide.guide_materials : '',
+    guide_tools: isEditing ? currentGuide.guide_tools : '',
     date_created: moment().format('YYYY-MM-DD')
   });
 
@@ -112,7 +119,7 @@ const GuideForm = ({ history, addGuide, user, addStep }) => {
 
   return (
     <div className="guide-form-container">
-      <h3>Create a Guide</h3>
+      <h3>{isEditing ? 'Edit Guide' : 'Create a Guide'}</h3>
       <form id="guide-form" onSubmit={handleSubmit}></form>
 
       <TextField

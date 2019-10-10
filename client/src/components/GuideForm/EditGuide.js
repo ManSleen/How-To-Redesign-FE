@@ -10,12 +10,15 @@ const EditGuide = ({ history, match, getGuideById, guide }) => {
   useEffect(() => {
     getGuideById(id);
   }, []);
-
-  return (
-    <div className="add-guide-container">
-      <GuideForm isEditing={true} guide={guide} history={history} />
-    </div>
-  );
+  if (guide) {
+    return (
+      <div className="add-guide-container">
+        <GuideForm isEditing={true} currentGuide={guide} history={history} />
+      </div>
+    );
+  } else {
+    return <div>Loading...</div>;
+  }
 };
 
 const mapStateToProps = state => {
