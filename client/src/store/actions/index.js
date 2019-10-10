@@ -210,3 +210,71 @@ export const getSingleUser = id => dispatch => {
       dispatch({ type: GET_SINGLE_USER_FAILURE });
     });
 };
+
+export const GET_SINGLE_PHOTO_START = 'GET_SINGLE_PHOTO_START';
+export const GET_SINGLE_PHOTO_SUCCESS = 'GET_SINGLE_PHOTO_SUCCESS';
+export const GET_SINGLE_PHOTO_FAILURE = 'GET_SINGLE_PHOTO_FAILURE';
+
+export const getSinglePhoto = id => dispatch => {
+  dispatch({ type: GET_SINGLE_PHOTO_START });
+  return axiosWithAuth()
+    .get(`/api/photos/one/${id}`)
+    .then(res => {
+      console.log('getSinglePhoto res', res);
+      dispatch({ type: GET_SINGLE_PHOTO_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_SINGLE_PHOTO_FAILURE });
+    });
+};
+
+export const GET_GUIDE_PHOTOS_START = 'GET_GUIDE_PHOTOS_START';
+export const GET_GUIDE_PHOTOS_SUCCESS = 'GET_GUIDE_PHOTOS_SUCCESS';
+export const GET_GUIDE_PHOTOS_FAILURE = 'GET_GUIDE_PHOTOS_FAILURE';
+
+export const getGuidePhotos = guideId => dispatch => {
+  dispatch({ type: GET_GUIDE_PHOTOS_START });
+  return axiosWithAuth()
+    .get(`/api/photos/${guideId}`)
+    .then(res => {
+      console.log('getGuidePhotos res', res);
+      dispatch({ type: GET_GUIDE_PHOTOS_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_GUIDE_PHOTOS_FAILURE });
+    });
+};
+
+export const ADD_PHOTO_START = 'ADD_PHOTO_START';
+export const ADD_PHOTO_SUCCESS = 'ADD_PHOTO_SUCCESS';
+export const ADD_PHOTO_FAILURE = 'ADD_PHOTO_FAILURE';
+
+export const addPhoto = photo => dispatch => {
+  dispatch({ type: ADD_PHOTO_START });
+  return axiosWithAuth()
+    .post('/api/photos/', photo)
+    .then(res => {
+      console.log('addPhoto res', res);
+      dispatch({ type: ADD_PHOTO_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: ADD_PHOTO_FAILURE });
+    });
+};
+
+export const DELETE_PHOTO_START = 'DELETE_PHOTO_START';
+export const DELETE_PHOTO_SUCCESS = 'DELETE_PHOTO_SUCCESS';
+export const DELETE_PHOTO_FAILURE = 'DELETE_PHOTO_FAILURE';
+
+export const deletePhoto = id => dispatch => {
+  dispatch({ type: DELETE_PHOTO_START });
+  return axiosWithAuth()
+    .delete(`/api/photos/${id}`)
+    .then(res => {
+      console.log('deletePhoto res', res);
+      dispatch({ type: DELETE_PHOTO_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: DELETE_PHOTO_FAILURE });
+    });
+};
