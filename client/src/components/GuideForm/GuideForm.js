@@ -43,7 +43,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const GuideForm = ({ history, addGuide, user, addStep }) => {
+const GuideForm = ({
+  history,
+  addGuide,
+  user,
+  addStep,
+  isEditing,
+  currentGuide
+}) => {
   const maxImageSize = 5242880;
 
   const {
@@ -74,12 +81,12 @@ const GuideForm = ({ history, addGuide, user, addStep }) => {
 
   const [guide, setGuide] = useState({
     guide_creator: user ? user.id : '',
-    guide_name: '',
-    guide_description: '',
-    guide_category: '',
-    guide_keywords: '',
-    guide_materials: '',
-    guide_tools: '',
+    guide_name: isEditing ? currentGuide.guide_name : '',
+    guide_description: isEditing ? currentGuide.guide_description : '',
+    guide_category: isEditing ? currentGuide.guide_category : '',
+    guide_keywords: isEditing ? currentGuide.guide_keywords : '',
+    guide_materials: isEditing ? currentGuide.guide_materials : '',
+    guide_tools: isEditing ? currentGuide.guide_tools : '',
     date_created: moment().format('YYYY-MM-DD')
   });
 
@@ -94,21 +101,25 @@ const GuideForm = ({ history, addGuide, user, addStep }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    addGuide(guide).then(res => {
-      if (res) {
-        guideSteps.map((step, index) => {
-          step.guide_id = res.data.id;
-          step.step_number = index + 1;
-          addStep(step);
-        });
-        console.log(guideSteps);
-      }
-    });
+    let guideId;
+    addGuide(guide)
+      .then(res => {
+        if (res) {
+          guideId = res.data.id;
+          guideSteps.map((step, index) => {
+            step.guide_id = res.data.id;
+            step.step_number = index + 1;
+            addStep(step);
+          });
+          console.log(guideSteps);
+        }
+      })
+      .then(() => history.push(`/guide/${guideId}`));
   };
 
   return (
     <div className="guide-form-container">
-      <h3>Create a Guide</h3>
+      <h3>{isEditing ? 'Edit Guide' : 'Create a Guide'}</h3>
       <form id="guide-form" onSubmit={handleSubmit}></form>
 
       <TextField
@@ -126,7 +137,7 @@ const GuideForm = ({ history, addGuide, user, addStep }) => {
         form="guide-form"
       />
       <div className="guide-photo-upload-input">
-        <h4>Upload Project Images</h4>
+        <h4>Upload a Project Image</h4>
 
         <div {...getRootProps({ className: 'dropzone' })}>
           <input {...getInputProps()} />
@@ -146,11 +157,13 @@ const GuideForm = ({ history, addGuide, user, addStep }) => {
                 <p>Images only please</p>
               </div>
             )}
-            <ul>
-              {acceptedFiles.length > 0 &&
-                acceptedFiles.map(acceptedFile => <li>{acceptedFile.name}</li>)}
-            </ul>
           </div>
+        </div>
+        <div className="upload-image-list">
+          <ul>
+            {acceptedFiles.length > 0 &&
+              acceptedFiles.map(acceptedFile => <li>{acceptedFile.name}</li>)}
+          </ul>
         </div>
       </div>
       <TextField
@@ -239,7 +252,13 @@ const GuideForm = ({ history, addGuide, user, addStep }) => {
         <StepCard key={index} step={step} />
       ))}
       <AddStep guideSteps={guideSteps} setGuideSteps={setGuideSteps} />
-      <input type="submit" value="Create Guide" form="guide-form" />
+      <input
+        color="white"
+        className="create-guide"
+        type="submit"
+        value="Create Guide"
+        form="guide-form"
+      />
       {/* <ActionButton form="guide-form" type="submit" text="Next" /> */}
     </div>
   );

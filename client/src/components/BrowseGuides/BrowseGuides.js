@@ -6,6 +6,7 @@ import Palette from '../../assets/icons/Palette';
 import Tent from '../../assets/icons/Tent';
 import PizzaEmoji from '../../assets/icons/PizzaEmoji';
 import GuideCard from './GuideCard';
+import Shrug from '../../assets/icons/Shrug';
 
 import { getGuides } from '../../store/actions';
 
@@ -15,12 +16,14 @@ const BrowseGuides = ({ getGuides, guides, isLoading }) => {
   }, []);
 
   const filterGuides = filter => {
-    const matchingGuides = guides
-      .filter(el => el.guide_category.toLowerCase() === filter)
-      .map(guide => {
-        return <GuideCard key={guide.id} guide={guide} />;
-      });
-    return matchingGuides;
+    if (guides && !isLoading) {
+      const matchingGuides = guides
+        .filter(el => el.guide_category.toLowerCase() === filter)
+        .map(guide => {
+          return <GuideCard key={guide.id} guide={guide} />;
+        });
+      return matchingGuides;
+    }
   };
 
   if (guides && !isLoading) {
@@ -50,7 +53,11 @@ const BrowseGuides = ({ getGuides, guides, isLoading }) => {
           <h4>Food</h4>
           <PizzaEmoji />
           <div className="guides-scroll-container">{filterGuides('food')}</div>
-          <div className="guides-scroll-container"></div>
+        </div>
+        <div className="guide-category-section everything-else">
+          <h4>Everything Else</h4>
+          <Shrug />
+          <div className="guides-scroll-container">{filterGuides('')}</div>
         </div>
       </div>
     );

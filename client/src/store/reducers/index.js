@@ -202,7 +202,6 @@ export const reducer = (state = initialState, action) => {
     case ADD_GUIDE_SUCCESS:
       return {
         ...state,
-        guides: [...state.guides, action.payload],
         error: '',
         isLoading: false
       };
