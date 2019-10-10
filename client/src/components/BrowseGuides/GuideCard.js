@@ -6,7 +6,7 @@ import avatar from '../../assets/images/user-avatar.png';
 
 const GuideCard = ({ guide }) => {
   return (
-    <Link to="/guide">
+    <Link to={`/guide/${guide.id}`}>
       <div className="guide-card-container">
         <img src={tech1} />
         <div className="guide-card-bottom">

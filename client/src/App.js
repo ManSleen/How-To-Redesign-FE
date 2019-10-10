@@ -13,6 +13,7 @@ import AddStep from './components/GuideForm/AddStep.js';
 import BrowseGuides from './components/BrowseGuides/BrowseGuides.js';
 import MyGuides from './components/MyGuides/MyGuides.js';
 import Guide from './components/Guide/Guide.js';
+import EditGuide from './components/GuideForm/EditGuide.js';
 
 import './scss/index.scss';
 
@@ -30,6 +31,7 @@ function App() {
       <Route exact path="/browse" component={BrowseGuides} />
       <Route exact path="/my-guides" component={MyGuides} />
       <Route exact path="/guide/:id" component={Guide} />
+      <Route exact path="/guide/edit/:id" component={EditGuide} />
       <Footer />
     </div>
   );
