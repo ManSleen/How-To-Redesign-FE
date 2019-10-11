@@ -344,6 +344,15 @@ code {
 
 .guide-photo-upload-input {
   margin: 20px 0;
+  overflow: hidden;
+  .thumbnail-preview {
+    width: 100%;
+    overflow: hidden;
+    object-fit: contain;
+    .thumb {
+      width: 100%;
+    }
+  }
   .upload-image-list {
     ul {
       list-style: none;
@@ -366,7 +375,7 @@ code {
     border: 8px dashed #35a93a;
     background-color: #c1ddc9;
     box-sizing: border-box;
-    transition: ease-in 0.05s;
+    transition: border 0.24s ease-in-out;
     p {
       font-size: 1.5rem;
       color: green;
@@ -396,6 +405,7 @@ code {
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
     p {
       letter-spacing: 0.03em;
       color: #858585;

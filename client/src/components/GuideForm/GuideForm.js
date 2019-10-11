@@ -18,7 +18,7 @@ import CameraIcon from '../../assets/icons/CameraIcon';
 import AddStep from './AddStep.js';
 import StepCard from './StepCard.js';
 
-import { addGuide, addStep } from '../../store/actions';
+import { addGuide, addStep, editGuide } from '../../store/actions';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -51,10 +51,11 @@ const GuideForm = ({
   user,
   addStep,
   isEditing,
-  currentGuide
+  currentGuide,
+  editGuide
 }) => {
   const maxImageSize = 5242880;
-
+  const [files, setFiles] = useState([]);
   const {
     isDragActive,
     getRootProps,
@@ -65,8 +66,13 @@ const GuideForm = ({
   } = useDropzone({
     accept: 'image/*',
     onDrop: (acceptedFiles, rejectedFiles) => {
-      console.log('acceptedFiles', acceptedFiles);
-      console.log('rejectedFiles', rejectedFiles);
+      setFiles(
+        acceptedFiles.map(file =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file)
+          })
+        )
+      );
     }
   });
 
@@ -104,9 +110,9 @@ const GuideForm = ({
   const handleSubmit = e => {
     e.preventDefault();
     if (isEditing) {
-      editGuide();
+      handleEditGuide();
     } else {
-      createGuide();
+      createGuide(guide);
     }
   };
 
@@ -117,28 +123,45 @@ const GuideForm = ({
       } = await axiosWithAuth().post(`/api/photos/signed`, {
         id: guideId
       });
-    } catch (err) {}
-  };
-
-  const createGuide = () => {
-    let guideId;
-    addGuide(guide)
-      .then(res => {
-        if (res) {
-          guideId = res.data.id;
-          guideSteps.map((step, index) => {
-            step.guide_id = res.data.id;
-            step.step_number = index + 1;
-            addStep(step);
-            return step;
-          });
-          console.log(guideSteps);
+      await axios.put(url, file[0], {
+        headers: {
+          'Content-Type': 'image/*'
         }
-      })
-      .then(() => history.push(`/guide/${guideId}`));
+      });
+      files.forEach(file => URL.revokeObjectURL(file.preview));
+      console.log(`${process.env.REACT_APP_S3_BUCKET}${key}`);
+      return `${process.env.REACT_APP_S3_BUCKET}${key}`;
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  const editGuide = () => {};
+  const createGuide = async guide => {
+    try {
+      const {
+        data: { id }
+      } = await addGuide(guide);
+      guideSteps.map((step, index) => {
+        step.guide_id = id;
+        step.step_number = index + 1;
+        addStep(step);
+        return step;
+      });
+      const uploadedImage = await handleImageUpload(files, id);
+      console.log('uploadedImage', uploadedImage);
+      console.log('files', files);
+      const guideWithImage = {
+        ...guide,
+        guide_image: uploadedImage
+      };
+      await editGuide(guideWithImage, id);
+      await history.push(`/guide/${id}`);
+    } catch (err) {
+      console.log('GuideForm.js createGuide ERROR:', err);
+    }
+  };
+
+  const handleEditGuide = () => {};
 
   return (
     <div className="guide-form-container">
@@ -169,9 +192,19 @@ const GuideForm = ({
               isDragReject ? ' rejected' : ''
             }`}
           >
-            <CameraIcon />
+            {!isDragActive &&
+              files.map((file, index) => (
+                <div className="thumbnail-preview" key={file.preview}>
+                  <img className="thumb" src={file.preview} />
+                </div>
+              ))}
 
-            {!isDragActive && <p>Click or drag a file to upload</p>}
+            {!isDragActive && files.length === 0 && (
+              <div>
+                <CameraIcon />
+                <p>Click or drag a file to upload</p>
+              </div>
+            )}
             {isDragActive && !isDragReject && <p>Drop it here my dude!</p>}
 
             {isFileTooLarge && <div className="error">File is too large</div>}
@@ -296,6 +329,6 @@ const mapStateToProps = state => {
 export default withRouter(
   connect(
     mapStateToProps,
-    { addGuide, addStep }
+    { addGuide, addStep, editGuide }
   )(GuideForm)
 );

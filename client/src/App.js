@@ -16,7 +16,7 @@ import Guide from './components/Guide/Guide.js';
 import EditGuide from './components/GuideForm/EditGuide.js';
 
 import './scss/index.scss';
-
+console.log(process.env);
 function App() {
   return (
     <div className="App">
