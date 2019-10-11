@@ -54,7 +54,7 @@ const GuideForm = ({
   currentGuide
 }) => {
   const maxImageSize = 5242880;
-
+  const [files, setFiles] = useState([]);
   const {
     isDragActive,
     getRootProps,
@@ -65,8 +65,13 @@ const GuideForm = ({
   } = useDropzone({
     accept: 'image/*',
     onDrop: (acceptedFiles, rejectedFiles) => {
-      console.log('acceptedFiles', acceptedFiles);
-      console.log('rejectedFiles', rejectedFiles);
+      setFiles(
+        acceptedFiles.map(file =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file)
+          })
+        )
+      );
     }
   });
 
@@ -117,7 +122,16 @@ const GuideForm = ({
       } = await axiosWithAuth().post(`/api/photos/signed`, {
         id: guideId
       });
-    } catch (err) {}
+      await axios.put(url, file[0], {
+        headers: {
+          'Content-Type': 'image/*'
+        }
+      });
+      files.forEach(file => URL.revokeObjectURL(file.preview));
+      return `${process.env.REACT_APP_S3_BUCKET}${key}`;
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const createGuide = () => {
@@ -169,9 +183,19 @@ const GuideForm = ({
               isDragReject ? ' rejected' : ''
             }`}
           >
-            <CameraIcon />
+            {!isDragActive &&
+              files.map((file, index) => (
+                <div className="thumbnail-preview" key={file.preview}>
+                  <img className="thumb" src={file.preview} />
+                </div>
+              ))}
 
-            {!isDragActive && <p>Click or drag a file to upload</p>}
+            {!isDragActive && files.length === 0 && (
+              <div>
+                <CameraIcon />
+                <p>Click or drag a file to upload</p>
+              </div>
+            )}
             {isDragActive && !isDragReject && <p>Drop it here my dude!</p>}
 
             {isFileTooLarge && <div className="error">File is too large</div>}
