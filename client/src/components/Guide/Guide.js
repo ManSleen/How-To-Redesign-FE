@@ -35,7 +35,7 @@ const Guide = ({ match, getGuideById, guide }) => {
             <p>Featured</p>
           </div>
         </div>
-        <img alt="" className="main-guide-image" src={tech1} />
+        <img alt="" className="main-guide-image" src={guide.guide_image} />
         <div className="guide-description">
           <p>{guide.guide_description}</p>
         </div>

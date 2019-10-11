@@ -18,7 +18,7 @@ import CameraIcon from '../../assets/icons/CameraIcon';
 import AddStep from './AddStep.js';
 import StepCard from './StepCard.js';
 
-import { addGuide, addStep } from '../../store/actions';
+import { addGuide, addStep, editGuide } from '../../store/actions';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -51,7 +51,8 @@ const GuideForm = ({
   user,
   addStep,
   isEditing,
-  currentGuide
+  currentGuide,
+  editGuide
 }) => {
   const maxImageSize = 5242880;
   const [files, setFiles] = useState([]);
@@ -109,9 +110,9 @@ const GuideForm = ({
   const handleSubmit = e => {
     e.preventDefault();
     if (isEditing) {
-      editGuide();
+      handleEditGuide();
     } else {
-      createGuide();
+      createGuide(guide);
     }
   };
 
@@ -128,31 +129,39 @@ const GuideForm = ({
         }
       });
       files.forEach(file => URL.revokeObjectURL(file.preview));
+      console.log(`${process.env.REACT_APP_S3_BUCKET}${key}`);
       return `${process.env.REACT_APP_S3_BUCKET}${key}`;
     } catch (err) {
       console.log(err);
     }
   };
 
-  const createGuide = () => {
-    let guideId;
-    addGuide(guide)
-      .then(res => {
-        if (res) {
-          guideId = res.data.id;
-          guideSteps.map((step, index) => {
-            step.guide_id = res.data.id;
-            step.step_number = index + 1;
-            addStep(step);
-            return step;
-          });
-          console.log(guideSteps);
-        }
-      })
-      .then(() => history.push(`/guide/${guideId}`));
+  const createGuide = async guide => {
+    try {
+      const {
+        data: { id }
+      } = await addGuide(guide);
+      guideSteps.map((step, index) => {
+        step.guide_id = id;
+        step.step_number = index + 1;
+        addStep(step);
+        return step;
+      });
+      const uploadedImage = await handleImageUpload(files, id);
+      console.log('uploadedImage', uploadedImage);
+      console.log('files', files);
+      const guideWithImage = {
+        ...guide,
+        guide_image: uploadedImage
+      };
+      await editGuide(guideWithImage, id);
+      await history.push(`/guide/${id}`);
+    } catch (err) {
+      console.log('GuideForm.js createGuide ERROR:', err);
+    }
   };
 
-  const editGuide = () => {};
+  const handleEditGuide = () => {};
 
   return (
     <div className="guide-form-container">
@@ -320,6 +329,6 @@ const mapStateToProps = state => {
 export default withRouter(
   connect(
     mapStateToProps,
-    { addGuide, addStep }
+    { addGuide, addStep, editGuide }
   )(GuideForm)
 );
