@@ -35,12 +35,14 @@ const BrowseGuides = ({ getGuides, guides, isLoading }) => {
           <FloppyEmoji />
           <div className="guides-scroll-container">{filterGuides('tech')}</div>
         </div>
+        <hr />
         <div className="guide-category-section craft">
           <h4>Craft</h4>
           <Palette />
           <div className="guides-scroll-container">{filterGuides('craft')}</div>
           <div className="guides-scroll-container"></div>
         </div>
+        <hr />
         <div className="guide-category-section outdoors">
           <h4>Outdoors</h4>
           <Tent />
@@ -49,11 +51,13 @@ const BrowseGuides = ({ getGuides, guides, isLoading }) => {
           </div>
           <div className="guides-scroll-container"></div>
         </div>
+        <hr />
         <div className="guide-category-section food">
           <h4>Food</h4>
           <PizzaEmoji />
           <div className="guides-scroll-container">{filterGuides('food')}</div>
         </div>
+        <hr />
         <div className="guide-category-section everything-else">
           <h4>Everything Else</h4>
           <Shrug />

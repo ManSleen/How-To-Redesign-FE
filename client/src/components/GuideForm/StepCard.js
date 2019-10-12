@@ -1,6 +1,5 @@
 import React from 'react';
 
-import tech1 from '../../assets/images/tech1.jpg';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -8,7 +7,7 @@ const StepCard = ({ step }) => {
   return (
     <div className="my-step-card-container">
       <div className="my-step-card-thumbnail">
-        <img alt="step cover" src={tech1} />
+        <img alt="step cover" src={step.step_image_url} />
       </div>
       <div className="my-step-card-description">
         <h3>

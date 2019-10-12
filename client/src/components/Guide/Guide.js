@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import tech1 from '../../assets/images/tech1.jpg';
 import Star from '../../assets/icons/Star';
 import Heart from '../../assets/icons/Heart';
 
@@ -40,23 +39,32 @@ const Guide = ({ match, getGuideById, guide }) => {
           <p>{guide.guide_description}</p>
         </div>
         <div className="guide-materials-tools">
-          <br />
-          <h3>Materials:</h3>
-          <p>{guide.guide_materials !== '' ? guide.guide_materials : 'none'}</p>
-          <br />
-          <h3>Tools:</h3>
-          <p>{guide.guide_tools !== '' ? guide.guide_tools : 'none'}</p>
+          <div className="materials-tools">
+            <h3>Materials:</h3>
+            <p>
+              {guide.guide_materials !== '' ? guide.guide_materials : 'none'}
+            </p>
+          </div>
+          <div className="materials-tools">
+            <h3>Tools:</h3>
+            <p>{guide.guide_tools !== '' ? guide.guide_tools : 'none'}</p>
+          </div>
         </div>
+        <hr />
         {guide.steps.map(step => {
           return (
             <div className="guide-step">
-              <h3>{`Step ${step.step_number}: ${step.step_title}`}</h3>
-              <div className="guides-scroll-container">
-                <img alt="" className="guide-image" src={tech1} />
-                <img alt="" className="guide-image" src={tech1} />
-                <img alt="" className="guide-image" src={tech1} />
-              </div>
+              <h3>{`${step.step_number}. ${step.step_title
+                .split(' ')
+                .map(word => word[0].toUpperCase() + word.slice(1))
+                .join(' ')}`}</h3>
+              <img
+                alt=""
+                className="main-guide-image"
+                src={step.step_image_url}
+              />
               <p>{step.step_description}</p>
+              <hr />
             </div>
           );
         })}

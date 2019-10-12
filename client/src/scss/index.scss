@@ -13,12 +13,20 @@ p {
   color: #171717;
 }
 
+hr {
+  opacity: 0.6;
+  color: #171717;
+  width: 80%;
+  margin: 0 auto;
+}
+
 body {
   margin: 0;
   font-family: Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: linear-gradient(180deg, #e5e5e5 46.22%, #e3e3e3 94.86%);
+
   a {
     cursor: pointer;
     text-decoration: none;
@@ -312,6 +320,7 @@ code {
 .guide-form-container {
   margin: 30px 25px;
   text-align: left;
+  min-height: 65vh;
   .form-error {
     color: red;
   }
@@ -410,6 +419,9 @@ code {
       letter-spacing: 0.03em;
       color: #858585;
     }
+    .dropzone-image {
+      text-align: center;
+    }
   }
   h4 {
     line-height: 23px;
@@ -432,13 +444,13 @@ code {
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  margin: 30px auto;
+  margin: 20px auto 40px auto;
   padding: 0 25px;
   p {
     font-family: Roboto;
     color: #e97520;
-    font-weight: 900;
-    font-size: 1.1rem;
+    font-weight: 500;
+    font-size: 1rem;
     line-height: 45px;
     margin-right: 2px;
     letter-spacing: 0.02rem;
@@ -447,6 +459,11 @@ code {
 
 .guide-category-section {
   margin: 40px 0;
+  h4 {
+    font-size: 1.4rem;
+    font-weight: 900;
+    letter-spacing: 0.03em;
+  }
 }
 
 .guide-card-container {
@@ -508,11 +525,13 @@ code {
     justify-content: space-between;
     align-items: center;
     box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.1);
-    margin: 15px 0;
+    margin: 20px 0;
+    border-radius: 8px;
+    overflow: hidden;
     .my-guide-card-thumbnail {
       align-self: stretch;
       img {
-        width: 100px;
+        width: 120px;
         height: 100%;
         object-fit: cover;
         box-sizing: border-box;
@@ -520,7 +539,7 @@ code {
     }
     .my-guide-card-description {
       text-align: left;
-      margin-left: 35px;
+      margin-left: 25px;
       width: 180px;
       h3 {
         margin-bottom: 10px;
@@ -556,15 +575,15 @@ code {
     p {
       font-style: normal;
       font-weight: normal;
-      font-size: 1rem;
+      font-size: 1.1rem;
       line-height: 180%;
       letter-spacing: 0.02rem;
     }
   }
   .guide-header {
-    margin: 19px 0 12px 0;
+    margin: 20px 0;
     .likes-container {
-      margin-top: 7px;
+      margin-top: 12px;
       p {
         display: inline;
       }
@@ -575,19 +594,25 @@ code {
     border-radius: 8px;
   }
   .guide-step {
-    margin: 50px 0 80px 0;
+    margin: 60px 0;
     .guide-image {
       width: 240px;
       margin: 10px 12px 25px 0;
       border-radius: 8px;
     }
     p {
-      font-size: 1rem;
+      margin: 15px 0 50px 0;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 1.1rem;
+      line-height: 180%;
+      letter-spacing: 0.02rem;
     }
     h3 {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       font-weight: 900;
       letter-spacing: 0.02em;
+      margin-bottom: 15px;
     }
   }
 
@@ -598,7 +623,7 @@ code {
     margin-bottom: 15px;
   }
   p {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     span {
       font-weight: bold;
     }
@@ -645,8 +670,17 @@ code {
 }
 
 .guide-materials-tools {
-  h3 {
-    font-size: 0.9rem;
+  height: auto;
+  margin-bottom: 60px;
+  .materials-tools {
+    margin: 20px 0;
+    border: solid 0.5px #17171733;
+    border-radius: 8px;
+    padding: 20px;
+    h3 {
+      font-size: 1rem;
+      margin-bottom: 5px;
+    }
   }
 }
 
