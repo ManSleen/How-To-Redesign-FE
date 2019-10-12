@@ -146,7 +146,7 @@ const AddStep = ({ history, guideSteps, setGuideSteps }) => {
                 ))}
 
               {!isDragActive && files.length === 0 && (
-                <div>
+                <div className="dropzone-image ">
                   <CameraIcon />
                   <p>Click or drag a file to upload</p>
                 </div>
@@ -183,7 +183,7 @@ const AddStep = ({ history, guideSteps, setGuideSteps }) => {
         />
 
         <button type="submit" className="add-another-step">
-          <p>Add Another Step</p>
+          <p>Add Step</p>
           <svg
             width="24"
             height="24"

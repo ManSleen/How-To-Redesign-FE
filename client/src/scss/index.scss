@@ -419,6 +419,9 @@ code {
       letter-spacing: 0.03em;
       color: #858585;
     }
+    .dropzone-image {
+      text-align: center;
+    }
   }
   h4 {
     line-height: 23px;
@@ -441,13 +444,13 @@ code {
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  margin: 30px auto;
+  margin: 20px auto 40px auto;
   padding: 0 25px;
   p {
     font-family: Roboto;
     color: #e97520;
-    font-weight: 900;
-    font-size: 1.1rem;
+    font-weight: 500;
+    font-size: 1rem;
     line-height: 45px;
     margin-right: 2px;
     letter-spacing: 0.02rem;

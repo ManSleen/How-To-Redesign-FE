@@ -201,7 +201,7 @@ const GuideForm = ({
               ))}
 
             {!isDragActive && files.length === 0 && (
-              <div>
+              <div className="dropzone-image">
                 <CameraIcon />
                 <p>Click or drag a file to upload</p>
               </div>
