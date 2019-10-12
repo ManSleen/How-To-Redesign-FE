@@ -26,6 +26,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: linear-gradient(180deg, #e5e5e5 46.22%, #e3e3e3 94.86%);
+
   a {
     cursor: pointer;
     text-decoration: none;
@@ -319,6 +320,7 @@ code {
 .guide-form-container {
   margin: 30px 25px;
   text-align: left;
+  min-height: 65vh;
   .form-error {
     color: red;
   }
