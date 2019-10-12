@@ -1,6 +1,5 @@
 import React from 'react';
 
-import tech1 from '../../assets/images/tech1.jpg';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 

@@ -2,16 +2,21 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
-import tech1 from '../../assets/images/tech1.jpg';
+import noImage from '../../assets/images/no-image.png';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const MyGuideCard = ({ guide }) => {
+  console.log('myguidecard guide', guide);
   return (
     <Link to={`/guide/${guide.id}`}>
       <div className="my-guide-card-container">
         <div className="my-guide-card-thumbnail">
-          <img alt="my guide thumbnail" src={tech1} />
+          {guide.guide_image !== null ? (
+            <img alt="my guide thumbnail" src={guide.guide_image} />
+          ) : (
+            <img alt="my guide thumbnail" src={noImage} />
+          )}
         </div>
         <div className="my-guide-card-description">
           <h3>
