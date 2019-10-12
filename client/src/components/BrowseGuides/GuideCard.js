@@ -8,7 +8,7 @@ const GuideCard = ({ guide }) => {
   return (
     <Link to={`/guide/${guide.id}`}>
       <div className="guide-card-container">
-        <img alt="guide cover" src={tech1} />
+        <img alt="guide cover" src={guide.guide_image || tech1} />
         <div className="guide-card-bottom">
           <div className="guide-card-avatar">
             <img alt="user avatar" src={avatar} />

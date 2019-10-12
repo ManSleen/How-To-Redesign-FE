@@ -47,15 +47,14 @@ const Guide = ({ match, getGuideById, guide }) => {
           <h3>Tools:</h3>
           <p>{guide.guide_tools !== '' ? guide.guide_tools : 'none'}</p>
         </div>
+        <h2>Instructions</h2>
         {guide.steps.map(step => {
           return (
             <div className="guide-step">
-              <h3>{`Step ${step.step_number}: ${step.step_title}`}</h3>
               <div className="guides-scroll-container">
-                <img alt="" className="guide-image" src={tech1} />
-                <img alt="" className="guide-image" src={tech1} />
-                <img alt="" className="guide-image" src={tech1} />
+                <img alt="" className="guide-image" src={step.step_image_url} />
               </div>
+              <h3>{`${step.step_number}. ${step.step_title}`}</h3>
               <p>{step.step_description}</p>
             </div>
           );

@@ -112,6 +112,7 @@ const GuideForm = ({
     if (isEditing) {
       handleEditGuide();
     } else {
+      console.log('guideSteps', guideSteps);
       createGuide(guide);
     }
   };
@@ -304,9 +305,10 @@ const GuideForm = ({
       <br />
       <br />
       <h3>Add Instructions</h3>
-      {guideSteps.map((step, index) => (
-        <StepCard key={index} step={step} />
-      ))}
+      {guideSteps.map((step, index) => {
+        console.log(step);
+        return <StepCard key={index} step={step} />;
+      })}
       <AddStep guideSteps={guideSteps} setGuideSteps={setGuideSteps} />
       <input
         color="white"
@@ -315,7 +317,6 @@ const GuideForm = ({
         value="Create Guide"
         form="guide-form"
       />
-      {/* <ActionButton form="guide-form" type="submit" text="Next" /> */}
     </div>
   );
 };

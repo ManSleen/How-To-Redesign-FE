@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { useDropzone } from 'react-dropzone';
+import axios from 'axios';
+import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
 
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import CameraIcon from '../../assets/icons/CameraIcon';
-
-import { addStep } from '../../store/actions';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -33,7 +32,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const AddStep = ({ history, addStep, guideSteps, setGuideSteps }) => {
+const AddStep = ({ history, guideSteps, setGuideSteps }) => {
+  // DROPZONE CONFIG START
   const maxImageSize = 5242880;
 
   const {
@@ -46,8 +46,13 @@ const AddStep = ({ history, addStep, guideSteps, setGuideSteps }) => {
   } = useDropzone({
     accept: 'image/*',
     onDrop: (acceptedFiles, rejectedFiles) => {
-      console.log('acceptedFiles', acceptedFiles);
-      console.log('rejectedFiles', rejectedFiles);
+      setFiles(
+        acceptedFiles.map(file =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file)
+          })
+        )
+      );
     }
   });
 
@@ -55,7 +60,10 @@ const AddStep = ({ history, addStep, guideSteps, setGuideSteps }) => {
     rejectedFiles.length > 0 && rejectedFiles[0].size > maxImageSize;
 
   const classes = useStyles();
+  // DROPZONE CONFIG END
 
+  //State
+  const [files, setFiles] = useState([]);
   const [step, setStep] = useState({
     step_title: '',
     step_description: '',
@@ -71,17 +79,42 @@ const AddStep = ({ history, addStep, guideSteps, setGuideSteps }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    setGuideSteps([...guideSteps, step]);
+    handleImageUpload(files).then(res => {
+      const newStep = { ...step, step_image_url: res };
+      setGuideSteps([...guideSteps, newStep]);
+    });
     setStep({
       step_title: '',
       step_description: '',
       step_image_url: ''
     });
+    setFiles([]);
+  };
+
+  const handleImageUpload = async file => {
+    try {
+      const {
+        data: { key, url }
+      } = await axiosWithAuth().post(`/api/photos/signed`, {
+        id: 'instructions'
+      });
+
+      await axios.put(url, file[0], {
+        headers: {
+          'Content-Type': 'image/*'
+        }
+      });
+
+      files.forEach(file => URL.revokeObjectURL(file.preview));
+      return `${process.env.REACT_APP_S3_BUCKET}${key}`;
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <div className="step-form-container">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={e => handleSubmit(e, step)}>
         <TextField
           fullWidth
           id="outlined-name"
@@ -105,9 +138,19 @@ const AddStep = ({ history, addStep, guideSteps, setGuideSteps }) => {
                 isDragActive ? ' active' : ''
               }${isDragReject ? ' rejected' : ''}`}
             >
-              <CameraIcon />
+              {!isDragActive &&
+                files.map((file, index) => (
+                  <div className="thumbnail-preview" key={file.preview}>
+                    <img className="thumb" src={file.preview} />
+                  </div>
+                ))}
 
-              {!isDragActive && <p>Click or drag a file to upload</p>}
+              {!isDragActive && files.length === 0 && (
+                <div>
+                  <CameraIcon />
+                  <p>Click or drag a file to upload</p>
+                </div>
+              )}
               {isDragActive && !isDragReject && <p>Drop it here my dude!</p>}
 
               {isFileTooLarge && <div className="error">File is too large</div>}
@@ -120,8 +163,8 @@ const AddStep = ({ history, addStep, guideSteps, setGuideSteps }) => {
           </div>
           <div className="upload-image-list">
             <ul>
-              {acceptedFiles.length > 0 &&
-                acceptedFiles.map(acceptedFile => <li>{acceptedFile.name}</li>)}
+              {files.length > 0 &&
+                files.map(acceptedFile => <li>{acceptedFile.name}</li>)}
             </ul>
           </div>
         </div>
@@ -159,7 +202,4 @@ const AddStep = ({ history, addStep, guideSteps, setGuideSteps }) => {
   );
 };
 
-export default connect(
-  null,
-  { addStep }
-)(AddStep);
+export default AddStep;
