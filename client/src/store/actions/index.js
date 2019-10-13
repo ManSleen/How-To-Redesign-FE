@@ -8,7 +8,7 @@ export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
 export const signUp = credentials => dispatch => {
   dispatch({ type: SIGN_UP_START });
   return axiosWithAuth()
-    .post('/api/auth/register', credentials)
+    .post('api/auth/register', credentials)
     .then(res => {
       console.log(res);
       localStorage.setItem('token', res.data.token);
@@ -32,7 +32,7 @@ export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const login = credentials => dispatch => {
   dispatch({ type: LOGIN_START });
   return axiosWithAuth()
-    .post('/api/auth/login', credentials)
+    .post('api/auth/login', credentials)
     .then(res => {
       console.log('login res', res);
       localStorage.setItem('token', res.data.token);
@@ -63,7 +63,7 @@ export const getGuides = () => dispatch => {
   dispatch({ type: GET_GUIDES_START });
 
   return axiosWithAuth()
-    .get('/api/guides')
+    .get('api/guides')
     .then(res => {
       dispatch({ type: GET_GUIDES_SUCCESS, payload: res.data });
     })
@@ -80,7 +80,7 @@ export const GET_GUIDE_BY_ID_FAILURE = 'GET_GUIDE_BY_ID_FAILURE';
 export const getGuideById = id => dispatch => {
   dispatch({ type: GET_GUIDE_BY_ID_START });
   return axiosWithAuth()
-    .get(`/api/guides/${id}`)
+    .get(`api/guides/${id}`)
     .then(res => {
       dispatch({ type: GET_GUIDE_BY_ID_SUCCESS, payload: res.data });
     })
@@ -97,7 +97,7 @@ export const GET_GUIDES_BY_USER_FAILURE = 'GET_GUIDES_BY_USER_FAILURE';
 export const getGuidesByUserId = userId => dispatch => {
   dispatch({ type: GET_GUIDES_BY_USER_START });
   return axiosWithAuth()
-    .get(`/api/guides/user/${userId}`)
+    .get(`api/guides/user/${userId}`)
     .then(res => {
       console.log(res);
       dispatch({ type: GET_GUIDES_BY_USER_SUCCESS, payload: res.data });
@@ -114,7 +114,7 @@ export const DELETE_GUIDE_FAILURE = 'DELETE_GUIDE_FAILURE';
 export const deleteGuide = id => dispatch => {
   dispatch({ type: DELETE_GUIDE_START });
   return axiosWithAuth()
-    .delete(`/api/guides/${id}`)
+    .delete(`api/guides/${id}`)
     .then(res => {
       dispatch({ type: DELETE_GUIDE_SUCCESS, payload: res.data.body });
       return true;
@@ -133,7 +133,7 @@ export const ADD_GUIDE_FAILURE = 'ADD_GUIDE_FAILURE';
 export const addGuide = guide => dispatch => {
   dispatch({ type: ADD_GUIDE_START });
   return axiosWithAuth()
-    .post('/api/guides', guide)
+    .post('api/guides', guide)
     .then(res => {
       dispatch({ type: ADD_GUIDE_SUCCESS, payload: res.data.body });
       return res;
@@ -151,7 +151,7 @@ export const UPDATE_GUIDE_FAILURE = 'UPDATE_GUIDE_FAILURE';
 export const editGuide = (guide, id) => dispatch => {
   dispatch({ type: UPDATE_GUIDE_START });
   return axiosWithAuth()
-    .put(`/api/guides/${id}`, guide)
+    .put(`api/guides/${id}`, guide)
     .then(res => {
       console.log(res);
       dispatch({ type: UPDATE_GUIDE_SUCCESS, payload: res.data.body });
@@ -169,7 +169,7 @@ export const ADD_STEP_FAILURE = 'ADD_STEP_FAILURE';
 export const addStep = (step, id) => dispatch => {
   dispatch({ type: ADD_STEP_START });
   return axiosWithAuth()
-    .post(`/api/steps`, step)
+    .post(`api/steps`, step)
     .then(res => {
       dispatch({ type: ADD_STEP_SUCCESS, payload: res.data.body });
     })
@@ -187,7 +187,7 @@ export const getUsers = () => dispatch => {
   dispatch({ type: GET_USERS_START });
 
   return axiosWithAuth()
-    .get('/api/users')
+    .get('api/users')
     .then(res => {
       dispatch({ type: GET_USERS_SUCCESS, payload: res.data.body });
       return true;
@@ -205,7 +205,7 @@ export const GET_SINGLE_USER_FAILURE = 'GET_SINGLE_USER_FAILURE';
 export const getSingleUser = id => dispatch => {
   dispatch({ type: GET_SINGLE_USER_START });
   return axiosWithAuth()
-    .get(`/api/users/${id}`)
+    .get(`api/users/${id}`)
     .then(res => {
       dispatch({ type: GET_SINGLE_USER_SUCCESS, payload: res.data.body });
     })
@@ -222,7 +222,7 @@ export const GET_SINGLE_PHOTO_FAILURE = 'GET_SINGLE_PHOTO_FAILURE';
 export const getSinglePhoto = id => dispatch => {
   dispatch({ type: GET_SINGLE_PHOTO_START });
   return axiosWithAuth()
-    .get(`/api/photos/one/${id}`)
+    .get(`api/photos/one/${id}`)
     .then(res => {
       console.log('getSinglePhoto res', res);
       dispatch({ type: GET_SINGLE_PHOTO_SUCCESS, payload: res.data });
@@ -239,7 +239,7 @@ export const GET_GUIDE_PHOTOS_FAILURE = 'GET_GUIDE_PHOTOS_FAILURE';
 export const getGuidePhotos = guideId => dispatch => {
   dispatch({ type: GET_GUIDE_PHOTOS_START });
   return axiosWithAuth()
-    .get(`/api/photos/${guideId}`)
+    .get(`api/photos/${guideId}`)
     .then(res => {
       console.log('getGuidePhotos res', res);
       dispatch({ type: GET_GUIDE_PHOTOS_SUCCESS, payload: res.data });
@@ -256,7 +256,7 @@ export const ADD_PHOTO_FAILURE = 'ADD_PHOTO_FAILURE';
 export const addPhoto = photo => dispatch => {
   dispatch({ type: ADD_PHOTO_START });
   return axiosWithAuth()
-    .post('/api/photos/', photo)
+    .post('api/photos/', photo)
     .then(res => {
       console.log('addPhoto res', res);
       dispatch({ type: ADD_PHOTO_SUCCESS, payload: res.data });
@@ -273,7 +273,7 @@ export const DELETE_PHOTO_FAILURE = 'DELETE_PHOTO_FAILURE';
 export const deletePhoto = id => dispatch => {
   dispatch({ type: DELETE_PHOTO_START });
   return axiosWithAuth()
-    .delete(`/api/photos/${id}`)
+    .delete(`api/photos/${id}`)
     .then(res => {
       console.log('deletePhoto res', res);
       dispatch({ type: DELETE_PHOTO_SUCCESS, payload: res.data });
