@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import '../scss/index.scss';
 
-import { faHome, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Sidebar from './Menu/Sidebar';
 
 const NavBar = () => {
   return (
@@ -16,11 +17,7 @@ const NavBar = () => {
           </Link>
         </div>
         <h2 className="nav-title">How-To</h2>
-        <div className="nav-menu-button">
-          <Link to="/profile">
-            <FontAwesomeIcon size="lg" icon={faBars} />
-          </Link>
-        </div>
+        <Sidebar />
       </div>
       <div className="nav-bar-divider"> </div>
     </div>

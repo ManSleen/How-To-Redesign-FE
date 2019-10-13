@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
+import PrivateRoute from './components/PrivateRoute.js';
 import NavBar from './components/NavBar.js';
 import SubNavBar from './components/SubNavBar.js';
 import Footer from './components/Footer.js';
@@ -26,12 +27,12 @@ function App() {
       <Route exact path="/profile" component={UserProfile} />
       <Route exact path="/sign-up" component={SignUp} />
       <Route exact path="/login" component={Login} />
-      <Route exact path="/create-guide" component={AddGuide} />
-      <Route exact path="/add-step" component={AddStep} />
+      <PrivateRoute exact path="/create-guide" component={AddGuide} />
+      <PrivateRoute exact path="/add-step" component={AddStep} />
       <Route exact path="/browse" component={BrowseGuides} />
-      <Route exact path="/my-guides" component={MyGuides} />
+      <PrivateRoute exact path="/my-guides" component={MyGuides} />
       <Route exact path="/guide/:id" component={Guide} />
-      <Route exact path="/guide/edit/:id" component={EditGuide} />
+      <PrivateRoute exact path="/guide/edit/:id" component={EditGuide} />
       <Footer />
     </div>
   );
