@@ -31,7 +31,7 @@ function App() {
       <PrivateRoute exact path="/add-step" component={AddStep} />
       <Route exact path="/browse" component={BrowseGuides} />
       <PrivateRoute exact path="/my-guides" component={MyGuides} />
-      <PrivateRoute exact path="/guide/:id" component={Guide} />
+      <Route exact path="/guide/:id" component={Guide} />
       <PrivateRoute exact path="/guide/edit/:id" component={EditGuide} />
       <Footer />
     </div>
