@@ -703,3 +703,79 @@ input[type='submit'] {
   line-height: 45px;
   letter-spacing: 0.5px;
 }
+
+//React Burger Styling START
+#page-wrap {
+  text-align: center;
+
+  /* Prevent sidebar from showing a scrollbar on page */
+  overflow: auto;
+}
+
+/* Individual item */
+.bm-item {
+  display: inline-block;
+
+  /* Our sidebar item styling */
+  text-decoration: none;
+  margin-bottom: 25px;
+  color: #d1d1d1;
+  transition: color 0.2s;
+  .menu-item {
+    color: white;
+  }
+}
+
+/* Change color on hover */
+.bm-item:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.bm-item:visited {
+  color: white;
+}
+
+/* The rest copied directly from react-burger-menu docs */
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 50px;
+  width: 50px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: #0db1f6;
+  padding: 2.5em 1.5em;
+  font-size: 1.4rem;
+  font-family: Roboto;
+  color: white;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #ffffff;
+  a {
+    color: white;
+  }
+}
+
+.bm-menu-wrap {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0.8;
+}
