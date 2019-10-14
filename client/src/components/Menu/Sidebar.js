@@ -20,11 +20,11 @@ const Sidebar = () => {
   };
 
   return (
-    <div>
+    <div className="nav-menu-container">
       <Menu
         width={'100vw'}
         right
-        customCrossIcon={<FontAwesomeIcon size="2x" icon={faTimes} />}
+        customCrossIcon={<FontAwesomeIcon size="3x" icon={faTimes} />}
         customBurgerIcon={false}
         isOpen={menuOpen}
         onStateChange={state => handleStateChange(state)}
@@ -32,20 +32,21 @@ const Sidebar = () => {
         <Link onClick={() => closeMenu()} className="menu-item" to="/login">
           Login
         </Link>
+        <hr />
         <Link onClick={() => closeMenu()} className="menu-item" to="/sign-up">
           Register
         </Link>
+        <hr />
         <Link onClick={() => closeMenu()} className="menu-item" to="/login">
           Login
         </Link>
+        <hr />
         <Link onClick={() => closeMenu()} className="menu-item" to="/sign-up">
           Register
         </Link>
       </Menu>
       <div onClick={() => toggleMenu()} className="nav-menu-button">
-        <Link to="/profile">
-          <FontAwesomeIcon size="lg" icon={faBars} />
-        </Link>
+        <FontAwesomeIcon size="lg" icon={faBars} />
       </div>
     </div>
   );
