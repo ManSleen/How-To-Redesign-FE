@@ -100,10 +100,23 @@ code {
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
+
   .sub-nav-category {
     font-weight: 600;
     letter-spacing: 0.03em;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    width: 95%;
+    @media screen and (min-width: 800px) {
+      width: 80%;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+.nav-menu-container {
+  hr {
+    opacity: 0.25;
+    width: 100%;
   }
 }
 
@@ -127,7 +140,6 @@ code {
   background-size: cover;
   @media screen and (min-width: 300px) {
     align-items: center;
-    padding-left: 25px;
   }
   @media screen and (min-width: 800px) {
     width: 100%;
@@ -214,7 +226,10 @@ code {
   flex-flow: column nowrap;
   justify-content: space-evenly;
   margin: 0 auto;
-  width: 85%;
+  width: 100%;
+  @media screen and (min-width: 500px) {
+    width: 85%;
+  }
 
   .homepage-description {
     margin: 0 25px;
@@ -819,8 +834,9 @@ input[type='submit'] {
 
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
-  height: 50px;
-  width: 50px;
+  height: 30px !important;
+  width: 30px !important;
+  margin: 20px 20px 0 0;
 }
 
 /* Color/shape of close button cross */
