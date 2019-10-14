@@ -7,11 +7,14 @@ import ActionButton from '../../assets/buttons/ActionButton.js';
 
 const Home = ({ history }) => {
   return (
-    <div>
+    <div className="home-container">
       <HomeHeroImage />
-      <HomeEmojiDivider />
-      <HomepageDescription />
-      <ActionButton history={history} routeTo="/sign-up" text="Get Started" />
+
+      <div className="homepage">
+        <HomeEmojiDivider />
+        <HomepageDescription />
+        <ActionButton history={history} routeTo="/sign-up" text="Get Started" />
+      </div>
     </div>
   );
 };
