@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   },
 
   dense: {
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(4)
   },
   menu: {
     width: 200
@@ -121,7 +121,7 @@ const SignUpForm = ({ history, signUp, error }) => {
 
       <div className="sign-up-form-login">
         Already have an account?{' '}
-        <Link to="login">
+        <Link to="/login">
           <span>Login →</span>
         </Link>
       </div>

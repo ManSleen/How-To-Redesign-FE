@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
@@ -79,6 +80,12 @@ const Login = ({ history, login, error }) => {
 
         <ActionButton type="submit" text="Log In" />
       </form>
+      <div className="sign-up-form-login">
+        Need to create an account?{' '}
+        <Link to="/sign-up">
+          <span>Sign Up →</span>
+        </Link>
+      </div>
     </div>
   );
 };

@@ -34,15 +34,23 @@ const Sidebar = () => {
         </Link>
         <hr />
         <Link onClick={() => closeMenu()} className="menu-item" to="/sign-up">
-          Register
+          Sign Up
         </Link>
         <hr />
-        <Link onClick={() => closeMenu()} className="menu-item" to="/login">
-          Login
+        <Link onClick={() => closeMenu()} className="menu-item" to="/profile">
+          My Profile
         </Link>
         <hr />
-        <Link onClick={() => closeMenu()} className="menu-item" to="/sign-up">
-          Register
+        <Link onClick={() => closeMenu()} className="menu-item" to="/browse">
+          Browse Guides
+        </Link>
+        <hr />
+        <Link
+          onClick={() => closeMenu()}
+          className="menu-item"
+          to="/create-guide"
+        >
+          Create A Guide
         </Link>
       </Menu>
       <div onClick={() => toggleMenu()} className="nav-menu-button">

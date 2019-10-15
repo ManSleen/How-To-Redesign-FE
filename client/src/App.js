@@ -24,7 +24,7 @@ function App() {
       <NavBar />
       <SubNavBar />
       <Route exact path="/" component={Home} />
-      <Route exact path="/profile" component={UserProfile} />
+      <PrivateRoute exact path="/profile" component={UserProfile} />
       <Route exact path="/sign-up" component={SignUp} />
       <Route exact path="/login" component={Login} />
       <PrivateRoute exact path="/create-guide" component={AddGuide} />

@@ -40,7 +40,6 @@ const BrowseGuides = ({ getGuides, guides, isLoading }) => {
           <h4>Craft</h4>
           <Palette />
           <div className="guides-scroll-container">{filterGuides('craft')}</div>
-          <div className="guides-scroll-container"></div>
         </div>
         <hr />
         <div className="guide-category-section outdoors">
@@ -49,7 +48,6 @@ const BrowseGuides = ({ getGuides, guides, isLoading }) => {
           <div className="guides-scroll-container">
             {filterGuides('outdoors')}
           </div>
-          <div className="guides-scroll-container"></div>
         </div>
         <hr />
         <div className="guide-category-section food">
