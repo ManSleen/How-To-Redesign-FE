@@ -92,6 +92,9 @@ code {
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
+  @media screen and (min-width: 800px) {
+    padding: 0 55px;
+  }
   .nav-home-button a {
     color: white;
   }
@@ -349,7 +352,6 @@ code {
   }
   .footer-github-logo {
     width: 20%;
-    cursor: pointer;
   }
 }
 
